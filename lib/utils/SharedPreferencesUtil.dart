@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-
+//无加密
 class SharedPreferencesUtil {
   static SharedPreferences? _preferences;
 
@@ -66,4 +66,11 @@ class SharedPreferencesUtil {
       }
     });
   }
+
+  Future<bool> checkUserLoggedIn() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('isLoggedIn') ?? false;
+  }
+
+
 }

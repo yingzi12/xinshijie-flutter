@@ -2,6 +2,11 @@
 battery=/Users/luhuang/.pub-cache/hosted/pub.dev/battery-2.0.3/
 connectivity_plus=/Users/luhuang/.pub-cache/hosted/pub.dev/connectivity_plus-5.0.1/
 device_info=/Users/luhuang/.pub-cache/hosted/pub.dev/device_info-2.0.3/
+flutter_secure_storage=/Users/luhuang/.pub-cache/hosted/pub.dev/flutter_secure_storage-9.0.0/
+flutter_secure_storage_linux=/Users/luhuang/.pub-cache/hosted/pub.dev/flutter_secure_storage_linux-1.2.0/
+flutter_secure_storage_macos=/Users/luhuang/.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.0.1/
+flutter_secure_storage_web=/Users/luhuang/.pub-cache/hosted/pub.dev/flutter_secure_storage_web-1.1.2/
+flutter_secure_storage_windows=/Users/luhuang/.pub-cache/hosted/pub.dev/flutter_secure_storage_windows-3.0.0/
 fluttertoast=/Users/luhuang/.pub-cache/hosted/pub.dev/fluttertoast-8.2.4/
 nb_utils=/Users/luhuang/.pub-cache/hosted/pub.dev/nb_utils-6.0.6/
 package_info_plus=/Users/luhuang/.pub-cache/hosted/pub.dev/package_info_plus-4.2.0/
