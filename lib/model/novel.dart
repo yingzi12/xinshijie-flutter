@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test2/app/sq_color.dart';
+import 'package:xinshijie_flutter/app/sq_color.dart';
 
 import 'chapter.dart';
 

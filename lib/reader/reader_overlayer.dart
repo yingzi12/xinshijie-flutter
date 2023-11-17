@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:test2/common/je_kit/lib/foundation/screen.dart';
-import 'package:test2/common/je_kit/lib/foundation/utility.dart';
+import 'package:xinshijie_flutter/common/je_kit/lib/foundation/screen.dart';
+import 'package:xinshijie_flutter/common/je_kit/lib/foundation/utility.dart';
 
-import 'package:test2/public.dart';
+import 'package:xinshijie_flutter/public.dart';
 import 'battery_view.dart';
 
 class ReaderOverlayer extends StatelessWidget {

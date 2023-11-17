@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test2/public.dart';
-import 'package:test2/app/root_scene.dart';
+import 'package:xinshijie_flutter/public.dart';
+import 'package:xinshijie_flutter/app/root_scene.dart';
 import 'package:oktoast/oktoast.dart';
 
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();

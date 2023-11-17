@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:test2/model/novel.dart';
-import 'package:test2/widget/novel_cover_image.dart';
-import 'package:test2/app/app_navigator.dart';
+import 'package:xinshijie_flutter/model/novel.dart';
+import 'package:xinshijie_flutter/widget/novel_cover_image.dart';
+import 'package:xinshijie_flutter/app/app_navigator.dart';
 
 class NovelCoverView extends StatelessWidget {
   final Novel novel;

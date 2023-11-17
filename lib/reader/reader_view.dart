@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:test2/common/je_kit/lib/foundation/screen.dart';
-import 'package:test2/common/je_kit/lib/foundation/utility.dart';
+import 'package:xinshijie_flutter/common/je_kit/lib/foundation/screen.dart';
+import 'package:xinshijie_flutter/common/je_kit/lib/foundation/utility.dart';
 
-import 'package:test2/public.dart';
+import 'package:xinshijie_flutter/public.dart';
 import 'reader_overlayer.dart';
 import 'reader_utils.dart';
 import 'reader_config.dart';

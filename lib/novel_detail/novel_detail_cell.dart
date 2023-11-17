@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:test2/public.dart';
+import 'package:xinshijie_flutter/public.dart';
 
 class NovelDetailCell extends StatelessWidget {
   final String iconName;

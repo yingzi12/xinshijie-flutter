@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:test2/common/je_kit/lib/foundation/screen.dart';
-import 'package:test2/common/je_kit/lib/widget/toast.dart';
+import 'package:xinshijie_flutter/common/je_kit/lib/foundation/screen.dart';
+import 'package:xinshijie_flutter/common/je_kit/lib/widget/toast.dart';
 
-import 'package:test2/public.dart';
+import 'package:xinshijie_flutter/public.dart';
 
 import 'bookshelf_item_view.dart';
 import 'bookshelf_header.dart';

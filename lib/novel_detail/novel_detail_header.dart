@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:test2/common/je_kit/lib/foundation/screen.dart';
-import 'package:test2/common/je_kit/lib/foundation/utility.dart';
+import 'package:xinshijie_flutter/common/je_kit/lib/foundation/screen.dart';
+import 'package:xinshijie_flutter/common/je_kit/lib/foundation/utility.dart';
 import 'dart:ui' as ui;
 
-import 'package:test2/public.dart';
+import 'package:xinshijie_flutter/public.dart';
 
 class NovelDetailHeader extends StatelessWidget {
   final Novel novel;

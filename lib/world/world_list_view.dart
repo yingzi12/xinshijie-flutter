@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:test2/common/je_kit/lib/widget/toast.dart';
+import 'package:xinshijie_flutter/common/je_kit/lib/widget/toast.dart';
 
-import 'package:test2/public.dart';
+import 'package:xinshijie_flutter/public.dart';
 
 import 'world_model.dart';
 import 'world_banner.dart';

@@ -1,4 +1,4 @@
-import 'package:test2/model/novel.dart';
+import 'package:xinshijie_flutter/model/novel.dart';
 
 class HomeModule {
   late String id;

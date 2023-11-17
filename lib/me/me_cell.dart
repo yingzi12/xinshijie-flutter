@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:test2/common/je_kit/lib/widget/default_cell.dart';
+import 'package:xinshijie_flutter/common/je_kit/lib/widget/default_cell.dart';
 
-import 'package:test2/public.dart';
+import 'package:xinshijie_flutter/public.dart';
 
 class MeCell extends StatelessWidget {
   final VoidCallback? onPressed;

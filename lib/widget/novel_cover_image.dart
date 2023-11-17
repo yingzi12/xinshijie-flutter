@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:test2/app/sq_color.dart';
+import 'package:xinshijie_flutter/app/sq_color.dart';
 
 class NovelCoverImage extends StatelessWidget {
   final String imgUrl;

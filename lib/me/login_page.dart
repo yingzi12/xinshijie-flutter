@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:test2/common/je_kit/lib/widget/code_button.dart';
-import 'package:test2/common/je_kit/lib/widget/toast.dart';
+import 'package:xinshijie_flutter/common/je_kit/lib/widget/code_button.dart';
+import 'package:xinshijie_flutter/common/je_kit/lib/widget/toast.dart';
 import 'dart:async';
 
-import 'package:test2/public.dart';
+import 'package:xinshijie_flutter/public.dart';
 
 class LoginPage extends StatefulWidget {
   @override

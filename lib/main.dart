@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
 
-import 'package:test2/app/app_scene.dart';
+import 'package:xinshijie_flutter/app/app_scene.dart';
 
 void main() {
   runApp(AppPage());

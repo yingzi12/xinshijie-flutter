@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:test2/common/je_kit/lib/foundation/screen.dart';
+import 'package:xinshijie_flutter/common/je_kit/lib/foundation/screen.dart';
 
-import 'package:test2/public.dart';
+import 'package:xinshijie_flutter/public.dart';
 
 class HomeNovelCoverView extends StatelessWidget {
   final Novel novel;

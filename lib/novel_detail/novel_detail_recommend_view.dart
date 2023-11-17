@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:test2/public.dart';
+import 'package:xinshijie_flutter/public.dart';
 
-import 'package:test2/home/home_novel_cover_view.dart';
+import 'package:xinshijie_flutter/home/home_novel_cover_view.dart';
 
 class NovelDetailRecommendView extends StatelessWidget {
   final List<Novel> novels;

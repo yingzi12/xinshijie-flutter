@@ -3,7 +3,7 @@ import 'package:battery/battery.dart';
 import 'package:device_info/device_info.dart';
 import 'dart:io';
 
-import 'package:test2/public.dart';
+import 'package:xinshijie_flutter/public.dart';
 
 class BatteryView extends StatefulWidget {
   @override

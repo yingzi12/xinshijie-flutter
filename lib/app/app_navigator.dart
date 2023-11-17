@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:test2/public.dart';
+import 'package:xinshijie_flutter/public.dart';
 
-import 'package:test2/novel_detail/novel_detail_page.dart';
-import 'package:test2/me/login_page.dart';
-import 'package:test2/me/web_page.dart';
-import 'package:test2/reader/reader_page.dart';
+import 'package:xinshijie_flutter/novel_detail/novel_detail_page.dart';
+import 'package:xinshijie_flutter/me/login_page.dart';
+import 'package:xinshijie_flutter/me/web_page.dart';
+import 'package:xinshijie_flutter/reader/reader_page.dart';
 
 class AppNavigator {
   static push(BuildContext context, Widget scene) {

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:test2/public.dart';
+import 'package:xinshijie_flutter/public.dart';
 
-import 'package:test2/home/home_scene.dart';
-import 'package:test2/bookshelf/bookshelf_scene.dart';
-import 'package:test2/me/me_page.dart';
-import 'package:test2/world/world_home.dart';
+import 'package:xinshijie_flutter/home/home_scene.dart';
+import 'package:xinshijie_flutter/bookshelf/bookshelf_scene.dart';
+import 'package:xinshijie_flutter/me/me_page.dart';
+import 'package:xinshijie_flutter/world/world_home.dart';
 
 class RootPage extends StatefulWidget {
   @override
