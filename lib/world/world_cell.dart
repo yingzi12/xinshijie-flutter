@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:xinshijie_flutter/model/world.dart';
 
 import 'package:xinshijie_flutter/public.dart';
 
-class NovelCell extends StatelessWidget {
-  final Novel novel;
+class WorldCell extends StatelessWidget {
+  final World world;
 
-  NovelCell(this.novel);
+  WorldCell(this.world);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        AppNavigator.pushNovelDetail(context, novel);
+        AppNavigator.pushWorldDetail(context, world);
       },
       child: Container(
         padding: EdgeInsets.all(15),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            NovelCoverImage(novel.imgUrl, width: 70, height: 93),
+            NovelCoverImage(world.imgUrl, width: 70, height: 93),
             SizedBox(width: 15),
             Expanded(
               child: buildRight(),
@@ -34,12 +35,12 @@ class NovelCell extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          novel.name,
+          world.name,
           style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 5),
         Text(
-          novel.introduction,
+          world.introduction,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
@@ -51,13 +52,13 @@ class NovelCell extends StatelessWidget {
         Row(
           children: <Widget>[
             Text(
-              novel.author,
+              world.author,
               style: TextStyle(fontSize: 14, color: SQColor.gray),
             ),
             Expanded(child: Container()),
-            buildTag(novel.status, novel.statusColor()),
+            buildTag(world.status, world.statusColor()),
             SizedBox(width: 5),
-            buildTag(novel.type, SQColor.gray),
+            buildTag(world.type, SQColor.gray),
           ],
         )
       ],

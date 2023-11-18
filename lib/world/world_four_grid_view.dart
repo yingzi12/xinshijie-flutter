@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:xinshijie_flutter/model/home_world_model.dart';
 
-import '../model/home_model.dart';
+import 'world_home_cover_view.dart';
 import 'world_section_view.dart';
-import 'world_novel_cover_view.dart';
 
-class NovelFourGridView extends StatelessWidget {
-  final HomeModule cardInfo;
+class WorldFourGridView extends StatelessWidget {
+  final HomeWorldModule cardInfo;
 
-  NovelFourGridView(this.cardInfo);
+  WorldFourGridView(this.cardInfo);
 
   @override
   Widget build(BuildContext context) {
-    var novels = cardInfo.books;
-    if (novels == null || novels.length < 8) {
+    var worlds = cardInfo.books;
+    if (worlds == null || worlds.length < 8) {
       return Container();
     }
-    var children = novels.map((novel) => HomeNovelCoverView(novel)).toList();
+    var children = worlds.map((world) => HomeWorldCoverView(world)).toList();
     return Container(
       color: Colors.white,
       child: Column(

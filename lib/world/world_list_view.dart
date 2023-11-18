@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:xinshijie_flutter/api/home_api.dart';
 import 'package:xinshijie_flutter/common/je_kit/lib/widget/toast.dart';
+import 'package:xinshijie_flutter/model/carousel_info.dart';
 import 'package:xinshijie_flutter/model/home_entity.dart';
+import 'package:xinshijie_flutter/model/home_world_model.dart';
 
-import 'package:xinshijie_flutter/public.dart';
 
-import '../model/home_model.dart';
 import 'world_banner.dart';
 import 'world_menu.dart';
 import 'world_normal_card.dart';
@@ -34,7 +34,7 @@ class HomeListView extends StatefulWidget {
 class HomeListViewState extends State<HomeListView> with AutomaticKeepAliveClientMixin {
   List<CarouselInfo> carouselInfos = [];
   int pageIndex = 1;
-  List<HomeModule> modules = [];
+  List<HomeWorldModule> modules = [];
 
   @override
   void initState() {
@@ -77,13 +77,13 @@ class HomeListViewState extends State<HomeListView> with AutomaticKeepAliveClien
       List<BannerVo> bannerList =homeEntity.bannerList?? [];
       List<HomeTabVo> homeList = homeEntity.homesList?? [];
       // List moduleData = responseJson['module'];
-      List<HomeModule> modules = [];
-      modules.add(HomeModule.fromBanner(bannerList));
+      List<HomeWorldModule> modules = [];
+      modules.add(HomeWorldModule.fromBanner(bannerList));
       if(homeList.length>0) {
-        modules.add(HomeModule.fromHome(homeList));
+        modules.add(HomeWorldModule.fromHome(homeList));
       }
       homeEntity.moduleList!.forEach((data) {
-        modules.add(HomeModule.fromModuleVo(data));
+        modules.add(HomeWorldModule.fromModuleVo(data));
       });
 
       setState(() {
@@ -95,30 +95,30 @@ class HomeListViewState extends State<HomeListView> with AutomaticKeepAliveClien
     }
   }
 
-  Widget bookCardWithInfo(HomeModule module) {
+  Widget bookCardWithInfo(HomeWorldModule module) {
     Widget? card;
     switch (module.style) {
       case 1:
-        card = NovelFourGridView(module);
+        card = WorldFourGridView(module);
         break;
       case 2:
-        card = NovelSecondHybirdCard(module);
+        card = WorldSecondHybirdCard(module);
         break;
       case 3:
-        card = NovelFirstHybirdCard(module);
+        card = WorldFirstHybirdCard(module);
         break;
       case 4:
-        card = NovelNormalCard(module);
+        card = WorldNormalCard(module);
         break;
     }
     return card ?? SizedBox();
   }
 
-  Widget buildModule(BuildContext context, HomeModule module) {
+  Widget buildModule(BuildContext context, HomeWorldModule module) {
     if (module.carousels != null) {
       return HomeBanner(module.carousels!);
     } else if (module.menus != null) {
-      return HomeMenu(module.menus!);
+      return WorldHomeMenu(module.menus!);
     } else if (module.books != null) {
       return bookCardWithInfo(module);
     }

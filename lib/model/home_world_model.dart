@@ -1,10 +1,10 @@
 import 'package:xinshijie_flutter/model/carousel_info.dart';
 import 'package:xinshijie_flutter/model/menu_info.dart';
-import 'package:xinshijie_flutter/model/novel.dart';
+import 'package:xinshijie_flutter/model/world.dart';
 
 import 'home_entity.dart';
 
-class HomeModule {
+class HomeWorldModule {
   late String id;
   late String name;
   late int style;
@@ -12,9 +12,9 @@ class HomeModule {
 
   List<CarouselInfo>? carousels;
   List<MenuInfo>? menus;
-  List<Novel>? books;
+  List<World>? books;
 
-  HomeModule.fromJson(Map data) {
+  HomeWorldModule.fromJson(Map data) {
     id = data['id'];
     name = data['m_s_name'];
     content = data['content'];
@@ -37,12 +37,12 @@ class HomeModule {
       style = data['m_s_style'];
       books = [];
       content.forEach((data) {
-        books!.add(Novel.fromJson(data));
+        books!.add(World.fromJson(data));
       });
     }
   }
 
-  HomeModule.fromBanner(List<BannerVo> list){
+  HomeWorldModule.fromBanner(List<BannerVo> list){
     id = "1";
     name = "顶部banner";
     carousels = [];
@@ -51,7 +51,7 @@ class HomeModule {
     });
   }
 
-  HomeModule.fromModuleVo(ModuleVo moduleVo){
+  HomeWorldModule.fromModuleVo(ModuleVo moduleVo){
 
       id = moduleVo.id!.toString();
       name = moduleVo.name??"";
@@ -62,18 +62,18 @@ class HomeModule {
         books = [];
         if(moduleVo.storyList!=null && moduleVo.storyList!.length>0) {
           moduleVo.storyList!.forEach((data) {
-            books!.add(Novel.fromStroy(data));
+            books!.add(World.fromStroy(data));
           });
         }
         if(moduleVo.worldList != null && moduleVo.worldList!.length>0) {
           moduleVo.worldList!.forEach((data) {
-            books!.add(Novel.fromWorld(data));
+            books!.add(World.fromWorld(data));
           });
         }
       }
   }
 
-  HomeModule.fromHome(List<HomeTabVo> homeList){
+  HomeWorldModule.fromHome(List<HomeTabVo> homeList){
     id = "2";
     name = "顶部导航";
     menus = [];
@@ -82,4 +82,3 @@ class HomeModule {
     });
   }
 }
-

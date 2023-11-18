@@ -48,7 +48,7 @@ class StoryApi {
     }
   }
 
-  static Future<List<StoryEntity>> getRandom(Map<String, dynamic> queryParams) async {
+  static Future<List<StoryEntity>> getRandom(Map<String, String> queryParams) async {
     final response = await HttpUtil.get(random, queryParams);
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonMap = json.decode(response.body);

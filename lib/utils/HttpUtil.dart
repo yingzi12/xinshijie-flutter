@@ -16,7 +16,7 @@ class HttpUtil {
   //
   //   return response;
   // }
-  static Future<http.Response> get(String path, [Map<String, dynamic>? queryParams]) async {
+  static Future<http.Response> get(String path, [Map<String, String>? queryParams]) async {
     final Uri uri = Uri.parse(baseUrl + path).replace(queryParameters: queryParams);
     return await http.get(uri);
   }

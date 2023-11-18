@@ -94,12 +94,6 @@ class Discuss {
     _id = json['id'];
     _wid = json['wid'];
     _wname = json['wname'];
-    if (json['comment'] != null) {
-      _comment = [];
-      json['comment'].forEach((v) {
-        _comment?.add(Dynamic.fromJson(v));
-      });
-    }
     _reply = json['reply'];
     _countLike = json['countLike'];
     _countReply = json['countReply'];

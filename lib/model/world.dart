@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xinshijie_flutter/app/sq_color.dart';
 import 'package:xinshijie_flutter/model/home_entity.dart';
+import 'package:xinshijie_flutter/model/world_entity.dart';
 import 'package:xinshijie_flutter/utils/constant.dart';
 
 import 'chapter.dart';
@@ -10,6 +11,7 @@ class World {
   late String name;
   late String imgUrl;
   late String firstChapter;
+  late String updateTime;
   late Chapter lastChapter;
   late String author;
   late double price;
@@ -110,5 +112,53 @@ class World {
       tags=remVo.wtag!.split(",");
     }
     recommendCount=0;
+  }
+
+  World.fromWorldEntity(WorldEntity remVo){
+    id=remVo.id!.toString();
+    imgUrl=remVo.imgUrl?? "img/empty.png";
+    author=remVo.createName??"未知";
+    name=remVo.name!;
+    introduction=remVo.intro??"无";
+    introduction=introduction.trim();
+    if(remVo.typeName ==null || remVo.typeName!.isEmpty  )
+      type="其他";
+    else
+      type=remVo.typeName!;
+
+    if(remVo.status!=null)
+      status=worldStatusMap[remVo!.status]??"其他";
+    else
+      status="其他";
+
+    if (remVo.tags == null || remVo.tags!.isEmpty ) {
+      tags = ["其他"];
+    }else{
+      tags=remVo.tags!.split(",");
+    }
+    if (remVo.updateElementId !=null) {
+      lastChapter = Chapter.fromJsonEntiry(remVo.updateElementId!.toInt(),remVo.updateElement??"",0);
+    }else{
+      lastChapter=Chapter.fromJsonEntiry(-1, "", 0);
+    }
+    recommendCount=0;
+    if(remVo.countElement!=null) {
+      chapterCount = remVo.countElement!.toInt();
+    }else{
+      chapterCount =0;
+    }
+    if(remVo.countComment!=null) {
+      commentCount = remVo.countComment!.toInt();
+    }else{
+      commentCount =0;
+    }
+    // if(remVo.count!=null) {
+    //   wordCount = remVo.countComment!.toInt();
+    // }else{
+    //   wordCount =0;
+    // }
+    wordCount =0;
+    score=0;
+    updateTime=remVo.updateElementTime?? (remVo.createTime??"");
   }
 }

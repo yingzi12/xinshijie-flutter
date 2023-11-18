@@ -11,6 +11,7 @@ class Novel {
   late String name;
   late String imgUrl;
   late String firstChapter;
+  late String updateTime;
   late Chapter lastChapter;
   late String author;
   late double price;
@@ -135,6 +136,29 @@ class Novel {
     }else{
       tags=remVo.tags!.split(",");
     }
+    if (remVo.updateElementId !=null) {
+      lastChapter = Chapter.fromJsonEntiry(remVo.updateElementId!.toInt(),remVo.updateElement??"",0);
+    }else{
+      lastChapter=Chapter.fromJsonEntiry(-1, "", 0);
+    }
     recommendCount=0;
+    if(remVo.countElement!=null) {
+      chapterCount = remVo.countElement!.toInt();
+    }else{
+      chapterCount =0;
+    }
+    if(remVo.countComment!=null) {
+      commentCount = remVo.countComment!.toInt();
+    }else{
+      commentCount =0;
+    }
+    // if(remVo.count!=null) {
+    //   wordCount = remVo.countComment!.toInt();
+    // }else{
+    //   wordCount =0;
+    // }
+    wordCount =0;
+    score=0;
+    updateTime=remVo.updateElementTime?? (remVo.createTime??"");
   }
 }

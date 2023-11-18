@@ -1,31 +1,31 @@
-/// id : 0
-/// name : ""
-/// description : []
+/// id : 18382
+/// name : "御鬼者传奇"
+/// description : null
 /// types : 0
 /// typeName : ""
-/// intro : ""
+/// intro : "御鬼者传奇最新章节由网友提供，《御鬼者传奇》情节跌宕起伏、扣人心弦，是一本情节与文笔俱佳的，蚂蚁文学免费提供御鬼者传奇最新清爽干净的文字章节在线阅读。"
 /// ranks : 0
 /// vitality : 0
-/// updateElement : ""
-/// updateElementId : 0
+/// updateElement : "最新更新的"
+/// updateElementId : 1111
 /// scores : 0
 /// countElement : 0
 /// countResident : 0
-/// countAdmin : 0
+/// countAdmin : 1
 /// countComment : 0
 /// countLike : 0
 /// countSee : 0
-/// createTime : ""
-/// updateTime : ""
-/// createName : ""
-/// createId : 0
-/// updateName : ""
-/// updateId : 0
-/// status : 0
-/// imgUrl : ""
-/// updateElementTime : ""
-/// source : ""
-/// isPrivate : 0
+/// createTime : "2023-11-15 12:16:55"
+/// updateTime : "2023-11-15 12:16:56"
+/// createName : "admin"
+/// createId : "1"
+/// updateName : "名称"
+/// updateId : "11"
+/// status : 5
+/// imgUrl : "/profile/upload/850/aed67105b43fecab924a0319c366b95b.jpg"
+/// updateElementTime : "2023-11-15 12:16:56"
+/// source : "沙之愚者"
+/// isPrivate : 2
 /// countFllow : 0
 /// countDiscuss : 0
 /// countAddType : 0
@@ -37,15 +37,16 @@
 /// countAuditDiscuss : 0
 /// countAuditCommit : 0
 /// countAuditManage : 0
-/// tags : ""
-/// adminType : 0
-/// descriptionZip : ""
+/// tags : "科幻小说"
+/// adminType : null
+/// descriptionZip : "御鬼者传奇最新章节由网友提供，《御鬼者传奇》情节跌宕起伏、扣人心弦，是一本情节与文笔俱佳的，蚂蚁文学免费提供御鬼者传奇最新清爽干净的文字章节在线阅读。"
 
 class WorldEntity {
   WorldEntity({
       num? id, 
       String? name, 
-      num? types,
+      dynamic description, 
+      num? types, 
       String? typeName, 
       String? intro, 
       num? ranks, 
@@ -62,9 +63,9 @@ class WorldEntity {
       String? createTime, 
       String? updateTime, 
       String? createName, 
-      num? createId, 
+      String? createId, 
       String? updateName, 
-      num? updateId, 
+      String? updateId, 
       num? status, 
       String? imgUrl, 
       String? updateElementTime, 
@@ -82,7 +83,7 @@ class WorldEntity {
       num? countAuditCommit, 
       num? countAuditManage, 
       String? tags, 
-      num? adminType, 
+      dynamic adminType, 
       String? descriptionZip,}){
     _id = id;
     _name = name;
@@ -131,6 +132,7 @@ class WorldEntity {
   WorldEntity.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
+    _description = json['description'];
     _types = json['types'];
     _typeName = json['typeName'];
     _intro = json['intro'];
@@ -173,7 +175,7 @@ class WorldEntity {
   }
   num? _id;
   String? _name;
-  List<dynamic>? _description;
+  dynamic _description;
   num? _types;
   String? _typeName;
   String? _intro;
@@ -191,9 +193,9 @@ class WorldEntity {
   String? _createTime;
   String? _updateTime;
   String? _createName;
-  num? _createId;
+  String? _createId;
   String? _updateName;
-  num? _updateId;
+  String? _updateId;
   num? _status;
   String? _imgUrl;
   String? _updateElementTime;
@@ -211,11 +213,11 @@ class WorldEntity {
   num? _countAuditCommit;
   num? _countAuditManage;
   String? _tags;
-  num? _adminType;
+  dynamic _adminType;
   String? _descriptionZip;
 WorldEntity copyWith({  num? id,
   String? name,
-  List<dynamic>? description,
+  dynamic description,
   num? types,
   String? typeName,
   String? intro,
@@ -233,9 +235,9 @@ WorldEntity copyWith({  num? id,
   String? createTime,
   String? updateTime,
   String? createName,
-  num? createId,
+  String? createId,
   String? updateName,
-  num? updateId,
+  String? updateId,
   num? status,
   String? imgUrl,
   String? updateElementTime,
@@ -253,10 +255,11 @@ WorldEntity copyWith({  num? id,
   num? countAuditCommit,
   num? countAuditManage,
   String? tags,
-  num? adminType,
+  dynamic adminType,
   String? descriptionZip,
 }) => WorldEntity(  id: id ?? _id,
   name: name ?? _name,
+  description: description ?? _description,
   types: types ?? _types,
   typeName: typeName ?? _typeName,
   intro: intro ?? _intro,
@@ -299,7 +302,7 @@ WorldEntity copyWith({  num? id,
 );
   num? get id => _id;
   String? get name => _name;
-  List<dynamic>? get description => _description;
+  dynamic get description => _description;
   num? get types => _types;
   String? get typeName => _typeName;
   String? get intro => _intro;
@@ -317,9 +320,9 @@ WorldEntity copyWith({  num? id,
   String? get createTime => _createTime;
   String? get updateTime => _updateTime;
   String? get createName => _createName;
-  num? get createId => _createId;
+  String? get createId => _createId;
   String? get updateName => _updateName;
-  num? get updateId => _updateId;
+  String? get updateId => _updateId;
   num? get status => _status;
   String? get imgUrl => _imgUrl;
   String? get updateElementTime => _updateElementTime;
@@ -337,16 +340,14 @@ WorldEntity copyWith({  num? id,
   num? get countAuditCommit => _countAuditCommit;
   num? get countAuditManage => _countAuditManage;
   String? get tags => _tags;
-  num? get adminType => _adminType;
+  dynamic get adminType => _adminType;
   String? get descriptionZip => _descriptionZip;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
     map['name'] = _name;
-    if (_description != null) {
-      map['description'] = _description?.map((v) => v.toJson()).toList();
-    }
+    map['description'] = _description;
     map['types'] = _types;
     map['typeName'] = _typeName;
     map['intro'] = _intro;

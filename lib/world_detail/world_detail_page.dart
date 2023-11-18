@@ -4,6 +4,7 @@ import 'package:xinshijie_flutter/api/comment_api.dart';
 import 'package:xinshijie_flutter/api/world_api.dart';
 import 'package:xinshijie_flutter/common/je_kit/lib/foundation/screen.dart';
 import 'package:xinshijie_flutter/model/comment_entity.dart';
+import 'package:xinshijie_flutter/model/world.dart';
 import 'package:xinshijie_flutter/model/world_comment.dart';
 import 'package:xinshijie_flutter/model/world_entity.dart';
 
@@ -26,8 +27,8 @@ class WorldDetailPage extends StatefulWidget {
 }
 
 class WorldDetailPageState extends State<WorldDetailPage> with RouteAware {
-  Novel? novel;
-  List<Novel> recommendWorldS = [];
+  World? world;
+  List<World> recommendWorldS = [];
   List<WorldComment> comments = [];
   ScrollController scrollController = ScrollController();
   double navAlpha = 0;
@@ -80,23 +81,25 @@ class WorldDetailPageState extends State<WorldDetailPage> with RouteAware {
   fetchData() async {
     var wId = this.widget.wId;
     WorldEntity worldEntity= await WorldApi.getInfo(wId);
-    // var novelResponse = await Request.post(action: 'world_detail', params: {'id': novelId});
+    // var worldResponse = await Request.post(action: 'world_detail', params: {'id': worldId});
     //停止
-    List<CommentEntity>  commentList= await CommentApi.getList({'wid': wId,'source':1});
-    // var commentsResponse = await Request.post(action: 'world_comment', params: {'id': novelId});
-    // List<WorldComment> comments = [];
-    // commentsResponse.forEach((data) {
-    //   comments.add(WorldComment.fromJson(data));
-    // });
+    List<CommentEntity>  commentList= await CommentApi.getList({'wid': wId.toString(),'source':1.toString()});
+    // var commentsResponse = await Request.post(action: 'world_comment', params: {'id': worldId});
+    List<WorldComment> comments = [];
+    commentList.forEach((data) {
+      comments.add(WorldComment.fromComment(data));
+    });
     //推荐
-    var recommendResponse = await Request.post(action: 'world_recommend', params: {'id': wId});
-    List<Novel> recommendWorldS = [];
-    recommendResponse.forEach((data) {
-      recommendWorldS.add(Novel.fromJson(data));
+    // var recommendResponse = await Request.post(action: 'world_recommend', params: {'id': wId});
+    List<WorldEntity>  randomList= await WorldApi.getRandom({});
+
+    List<World> recommendWorldS = [];
+    randomList.forEach((data) {
+      recommendWorldS.add(World.fromWorldEntity(data));
     });
 
     setState(() {
-      this.novel = Novel.fromWorldEntity(worldEntity);
+      this.world = World.fromWorldEntity(worldEntity);
       this.comments = comments;
       this.recommendWorldS = recommendWorldS;
     });
@@ -125,7 +128,7 @@ class WorldDetailPageState extends State<WorldDetailPage> with RouteAware {
                 ),
                 Expanded(
                   child: Text(
-                    novel!.name,
+                    world!.name,
                     style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
@@ -167,7 +170,7 @@ class WorldDetailPageState extends State<WorldDetailPage> with RouteAware {
             padding: EdgeInsets.symmetric(vertical: 15),
             child: Center(
               child: Text(
-                '查看全部评论（${novel!.commentCount}条）',
+                '查看全部评论（${world!.commentCount}条）',
                 style: TextStyle(fontSize: 14, color: SQColor.gray),
               ),
             ),
@@ -180,7 +183,7 @@ class WorldDetailPageState extends State<WorldDetailPage> with RouteAware {
   Widget buildTags() {
     var colors = [Color(0xFFF9A19F), Color(0xFF59DDB9), Color(0xFF7EB3E7)];
     var i = 0;
-    var tagWidgets = novel!.tags.map((tag) {
+    var tagWidgets = world!.tags.map((tag) {
       var color = colors[i % 3];
       var tagWidget = Container(
         decoration: BoxDecoration(
@@ -202,10 +205,10 @@ class WorldDetailPageState extends State<WorldDetailPage> with RouteAware {
 
   @override
   Widget build(BuildContext context) {
-    if (this.novel == null) {
+    if (this.world == null) {
       return Scaffold(appBar: AppBar(elevation: 0));
     }
-    var novel = this.novel!;
+    var world = this.world!;
     return Scaffold(
       body: AnnotatedRegion(
         value: navAlpha > 0.5 ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
@@ -218,18 +221,18 @@ class WorldDetailPageState extends State<WorldDetailPage> with RouteAware {
                     controller: scrollController,
                     padding: EdgeInsets.only(top: 0),
                     children: <Widget>[
-                      WorldDetailHeader(novel),
-                      WorldSummaryView(novel.introduction, isSummaryUnfold, changeSummaryMaxLines),
+                      WorldDetailHeader(world),
+                      WorldSummaryView(world.introduction, isSummaryUnfold, changeSummaryMaxLines),
                       WorldDetailCell(
                         iconName: 'img/detail_latest.png',
                         title: '最新',
-                        subtitle: novel.lastChapter.title,
-                        attachedWidget: Text(novel.status, style: TextStyle(fontSize: 14, color: novel.statusColor())),
+                        subtitle: world.lastChapter?.title ?? '',
+                        attachedWidget: Text(world.status, style: TextStyle(fontSize: 14, color: world.statusColor())),
                       ),
                       WorldDetailCell(
                         iconName: 'img/detail_chapter.png',
-                        title: '目录',
-                        subtitle: '共${novel.chapterCount}章',
+                        title: '元素',
+                        subtitle: world.chapterCount != null ? '共${world.chapterCount}章' : '',
                       ),
                       buildTags(),
                       SizedBox(height: 10),
@@ -239,7 +242,7 @@ class WorldDetailPageState extends State<WorldDetailPage> with RouteAware {
                     ],
                   ),
                 ),
-                WorldDetailToolbar(novel),
+                WorldDetailToolbar(world),
               ],
             ),
             buildNavigationBar(),

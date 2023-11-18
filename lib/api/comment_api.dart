@@ -29,7 +29,7 @@ class CommentApi {
     return HttpUtil.processResponse(response);
   }
 
-  static Future<List<CommentEntity>> getList(Map<String, dynamic> queryParams) async {
+  static Future<List<CommentEntity>> getList(Map<String, String> queryParams) async {
     final response = await HttpUtil.get(list, queryParams);
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonMap = json.decode(response.body);

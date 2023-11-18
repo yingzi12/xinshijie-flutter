@@ -8,4 +8,10 @@ class Chapter {
     title = data['title'];
     index = data['index'] ?? 0;
   }
+
+  Chapter.fromJsonEntiry(int _id,String _title,int _index) {
+    id = _id;
+    title = _title;
+    index = _index;
+  }
 }

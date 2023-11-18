@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xinshijie_flutter/model/world.dart';
 
 import 'package:xinshijie_flutter/public.dart';
 
@@ -6,6 +7,7 @@ import 'package:xinshijie_flutter/novel_detail/novel_detail_page.dart';
 import 'package:xinshijie_flutter/me/login_page.dart';
 import 'package:xinshijie_flutter/me/web_page.dart';
 import 'package:xinshijie_flutter/reader/reader_page.dart';
+import 'package:xinshijie_flutter/world_detail/world_detail_page.dart';
 
 class AppNavigator {
   static push(BuildContext context, Widget scene) {
@@ -19,6 +21,10 @@ class AppNavigator {
 
   static pushNovelDetail(BuildContext context, Novel novel) {
     AppNavigator.push(context, NovelDetailPage(novel.id));
+  }
+
+  static pushWorldDetail(BuildContext context, World world) {
+    AppNavigator.push(context, WorldDetailPage( int.parse(world.id)));
   }
 
   static pushLogin(BuildContext context) {

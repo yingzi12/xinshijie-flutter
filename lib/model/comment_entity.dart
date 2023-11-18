@@ -1,40 +1,40 @@
-/// id : 0
-/// wid : 0
-/// wname : ""
-/// upid : 0
-/// comment : ""
-/// reply : ""
-/// ranks : 0
-/// countLike : 0
-/// countReply : 0
-/// countDisagree : 0
-/// status : 0
-/// createId : 0
-/// createName : ""
-/// createTime : ""
-/// updateId : 0
-/// updateName : ""
-/// updateTime : ""
-/// eid : 0
-/// title : ""
-/// types : 0
-/// pid : 0
-/// page : 0
-/// size : 0
-/// circleUrl : ""
-/// sid : 0
-/// sname : ""
-/// source : 0
-/// nickname : ""
-/// replyNickname : ""
-/// isRecommend : 0
+/// id : "95"
+/// wid : 18382
+/// wname : "111"
+/// upid : "1"
+/// comment : "内容"
+/// reply : "回复"
+/// ranks : 1
+/// countLike : 1
+/// countReply : 1
+/// countDisagree : 1
+/// status : 1
+/// createId : "1"
+/// createName : "对对对"
+/// createTime : "2023-11-18 21:45:24"
+/// updateId : "1"
+/// updateName : "1"
+/// updateTime : "2023-11-18 21:45:24"
+/// eid : 1
+/// title : "标题"
+/// types : 1
+/// pid : "1"
+/// page : null
+/// size : null
+/// circleUrl : "1111"
+/// sid : null
+/// sname : null
+/// source : 1
+/// nickname : "111"
+/// replyNickname : "111"
+/// isRecommend : 1
 
 class CommentEntity {
   CommentEntity({
-      num? id, 
+      String? id, 
       num? wid, 
       String? wname, 
-      num? upid, 
+      String? upid, 
       String? comment, 
       String? reply, 
       num? ranks, 
@@ -42,21 +42,21 @@ class CommentEntity {
       num? countReply, 
       num? countDisagree, 
       num? status, 
-      num? createId, 
+      String? createId, 
       String? createName, 
       String? createTime, 
-      num? updateId, 
+      String? updateId, 
       String? updateName, 
       String? updateTime, 
       num? eid, 
       String? title, 
       num? types, 
-      num? pid, 
-      num? page, 
-      num? size, 
+      String? pid, 
+      dynamic page, 
+      dynamic size, 
       String? circleUrl, 
-      num? sid, 
-      String? sname, 
+      dynamic sid, 
+      dynamic sname, 
       num? source, 
       String? nickname, 
       String? replyNickname, 
@@ -125,10 +125,10 @@ class CommentEntity {
     _replyNickname = json['replyNickname'];
     _isRecommend = json['isRecommend'];
   }
-  num? _id;
+  String? _id;
   num? _wid;
   String? _wname;
-  num? _upid;
+  String? _upid;
   String? _comment;
   String? _reply;
   num? _ranks;
@@ -136,29 +136,29 @@ class CommentEntity {
   num? _countReply;
   num? _countDisagree;
   num? _status;
-  num? _createId;
+  String? _createId;
   String? _createName;
   String? _createTime;
-  num? _updateId;
+  String? _updateId;
   String? _updateName;
   String? _updateTime;
   num? _eid;
   String? _title;
   num? _types;
-  num? _pid;
-  num? _page;
-  num? _size;
+  String? _pid;
+  dynamic _page;
+  dynamic _size;
   String? _circleUrl;
-  num? _sid;
-  String? _sname;
+  dynamic _sid;
+  dynamic _sname;
   num? _source;
   String? _nickname;
   String? _replyNickname;
   num? _isRecommend;
-CommentEntity copyWith({  num? id,
+CommentEntity copyWith({  String? id,
   num? wid,
   String? wname,
-  num? upid,
+  String? upid,
   String? comment,
   String? reply,
   num? ranks,
@@ -166,21 +166,21 @@ CommentEntity copyWith({  num? id,
   num? countReply,
   num? countDisagree,
   num? status,
-  num? createId,
+  String? createId,
   String? createName,
   String? createTime,
-  num? updateId,
+  String? updateId,
   String? updateName,
   String? updateTime,
   num? eid,
   String? title,
   num? types,
-  num? pid,
-  num? page,
-  num? size,
+  String? pid,
+  dynamic page,
+  dynamic size,
   String? circleUrl,
-  num? sid,
-  String? sname,
+  dynamic sid,
+  dynamic sname,
   num? source,
   String? nickname,
   String? replyNickname,
@@ -216,10 +216,10 @@ CommentEntity copyWith({  num? id,
   replyNickname: replyNickname ?? _replyNickname,
   isRecommend: isRecommend ?? _isRecommend,
 );
-  num? get id => _id;
+  String? get id => _id;
   num? get wid => _wid;
   String? get wname => _wname;
-  num? get upid => _upid;
+  String? get upid => _upid;
   String? get comment => _comment;
   String? get reply => _reply;
   num? get ranks => _ranks;
@@ -227,21 +227,21 @@ CommentEntity copyWith({  num? id,
   num? get countReply => _countReply;
   num? get countDisagree => _countDisagree;
   num? get status => _status;
-  num? get createId => _createId;
+  String? get createId => _createId;
   String? get createName => _createName;
   String? get createTime => _createTime;
-  num? get updateId => _updateId;
+  String? get updateId => _updateId;
   String? get updateName => _updateName;
   String? get updateTime => _updateTime;
   num? get eid => _eid;
   String? get title => _title;
   num? get types => _types;
-  num? get pid => _pid;
-  num? get page => _page;
-  num? get size => _size;
+  String? get pid => _pid;
+  dynamic get page => _page;
+  dynamic get size => _size;
   String? get circleUrl => _circleUrl;
-  num? get sid => _sid;
-  String? get sname => _sname;
+  dynamic get sid => _sid;
+  dynamic get sname => _sname;
   num? get source => _source;
   String? get nickname => _nickname;
   String? get replyNickname => _replyNickname;

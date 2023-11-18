@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:xinshijie_flutter/common/je_kit/lib/foundation/screen.dart';
+import 'package:xinshijie_flutter/model/carousel_info.dart';
 
-import 'package:xinshijie_flutter/public.dart';
-import '../model/home_model.dart';
 
 class HomeBanner extends StatelessWidget {
   final List<CarouselInfo> carouselInfos;

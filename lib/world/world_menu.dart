@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:xinshijie_flutter/model/menu_info.dart';
 
 import 'package:xinshijie_flutter/public.dart';
 
-import '../model/home_model.dart';
-
-class HomeMenu extends StatelessWidget {
+class WorldHomeMenu extends StatelessWidget {
   final List<MenuInfo> infos;
 
-  HomeMenu(this.infos);
+  WorldHomeMenu(this.infos);
 
   @override
   Widget build(BuildContext context) {

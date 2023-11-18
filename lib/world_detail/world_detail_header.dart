@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:xinshijie_flutter/common/je_kit/lib/foundation/screen.dart';
 import 'package:xinshijie_flutter/common/je_kit/lib/foundation/utility.dart';
+import 'package:xinshijie_flutter/model/world.dart';
 import 'dart:ui' as ui;
 
 import 'package:xinshijie_flutter/public.dart';
 
 class WorldDetailHeader extends StatelessWidget {
-  final Novel novel;
-  WorldDetailHeader(this.novel);
+  final World world;
+  WorldDetailHeader(this.world);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class WorldDetailHeader extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Image(
-            image: CachedNetworkImageProvider(novel.imgUrl),
+            image: CachedNetworkImageProvider(world.imgUrl),
             fit: BoxFit.fitWidth,
             width: width,
             height: height,
@@ -44,33 +45,34 @@ class WorldDetailHeader extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          NovelCoverImage(novel.imgUrl, width: 100, height: 133),
+          NovelCoverImage(world.imgUrl, width: 100, height: 133),
           SizedBox(width: 15),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(novel.name, style: TextStyle(fontSize: Utility.fixedFontSize(18), color: Colors.white, fontWeight: FontWeight.bold)),
+                Text(world.name, style: TextStyle(fontSize: Utility.fixedFontSize(18), color: Colors.white, fontWeight: FontWeight.bold)),
                 SizedBox(height: 10),
-                Text(novel.author, style: TextStyle(fontSize: Utility.fixedFontSize(14), color: SQColor.white)),
+                Text(world.author, style: TextStyle(fontSize: Utility.fixedFontSize(14), color: SQColor.white)),
                 SizedBox(height: 10),
-                Text('${novel.wordCount}万字 ${novel.price}书豆/千字', style: TextStyle(fontSize: Utility.fixedFontSize(14), color: SQColor.white)),
+                Text('更新时间 : ${world.updateTime??""}', style: TextStyle(fontSize: Utility.fixedFontSize(10), color: SQColor.white)),
+                // Text('${world.wordCount}万字 ${world.price}书豆/千字', style: TextStyle(fontSize: Utility.fixedFontSize(14), color: SQColor.white)),
                 SizedBox(height: 10),
                 buildScore(),
                 SizedBox(height: 10),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Image.asset('img/read_icon_vip.png'),
-                    Expanded(
-                      child: Text(
-                        ' 续费包月会员，万本小说免费读 >',
-                        style: TextStyle(fontSize: Utility.fixedFontSize(14), color: Color(0xFFFEA900)),
-                        maxLines: 1,
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: <Widget>[
+                //     Image.asset('img/read_icon_vip.png'),
+                //     Expanded(
+                //       child: Text(
+                //         ' 续费包月会员，万本小说免费读 >',
+                //         style: TextStyle(fontSize: Utility.fixedFontSize(14), color: Color(0xFFFEA900)),
+                //         maxLines: 1,
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           )
@@ -80,9 +82,9 @@ class WorldDetailHeader extends StatelessWidget {
   }
 
   Widget buildScore() {
-    List<Widget> children = [Text('评分：${novel.score}分  ', style: TextStyle(fontSize: Utility.fixedFontSize(14), color: Color(0xfff8e71c)))];
+    List<Widget> children = [Text('评分：${world.score??0}分  ', style: TextStyle(fontSize: Utility.fixedFontSize(14), color: Color(0xfff8e71c)))];
 
-    var star = novel.score;
+    var star = world.score??0;
 
     for (var i = 0; i < 5; i++) {
       if (star < i) {

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:xinshijie_flutter/common/je_kit/lib/foundation/screen.dart';
+import 'package:xinshijie_flutter/model/world.dart';
 
 import 'package:xinshijie_flutter/public.dart';
 
 class WorldDetailToolbar extends StatelessWidget {
-  final Novel novel;
-  WorldDetailToolbar(this.novel);
+  final World world;
+  WorldDetailToolbar(this.world);
 
   read() {}
   @override
@@ -26,7 +27,7 @@ class WorldDetailToolbar extends StatelessWidget {
         Expanded(
           child: GestureDetector(
             onTap: () {
-              AppNavigator.pushReader(context, novel.firstArticleId);
+              AppNavigator.pushReader(context, world.firstArticleId);
             },
             child: Container(
               height: 40,

@@ -7,7 +7,7 @@ import 'package:xinshijie_flutter/utils/HttpUtil.dart';
 class WorldApi {
 
   // 类变量（静态变量）
-  static String info ="/wiki/world/info";
+  static String info ="/wiki/world/getInfo";
 
   static String list ="/wiki/world/list";
 
@@ -48,7 +48,7 @@ class WorldApi {
     }
   }
 
-  static Future<List<WorldEntity>> getRandom(Map<String, dynamic> queryParams) async {
+  static Future<List<WorldEntity>> getRandom(Map<String, String> queryParams) async {
     final response = await HttpUtil.get(random, queryParams);
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonMap = json.decode(response.body);
@@ -65,7 +65,7 @@ class WorldApi {
   }
 
   static Future<WorldEntity> getInfo(int id) async {
-    final response = await HttpUtil.get("$info?id=$id");
+    final response = await HttpUtil.get("$info/$id");
 
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonMap = json.decode(response.body);
