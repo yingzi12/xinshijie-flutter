@@ -1,26 +1,26 @@
 import 'dart:convert';
 
-import 'package:xinshijie_flutter/model/world_entity.dart';
+import 'package:xinshijie_flutter/model/story_entity.dart';
 import 'package:xinshijie_flutter/model/world_model.dart';
 import 'package:xinshijie_flutter/utils/HttpUtil.dart';
 
-class WorldApi {
+class StoryApi {
 
   // 类变量（静态变量）
-  static String info ="/wiki/world/info";
+  static String info ="/wiki/story/info";
 
-  static String list ="/wiki/world/list";
+  static String list ="/wiki/story/list";
 
-  static String random ="/wiki/world/random";
+  static String random ="/wiki/story/random";
 
-
-  static String add ="/wiki/world/add";
-
-
-  static String del ="/wiki/world/del";
+  
+  static String add ="/wiki/story/add";
 
 
-  static String edit ="/wiki/world/edit";
+  static String del ="/wiki/story/del";
+
+
+  static String edit ="/wiki/story/edit";
 
   static Future<Map<String, dynamic>> addWorld(Map<String, String> body) async {
     final response = await HttpUtil.post(add, body);
@@ -32,13 +32,13 @@ class WorldApi {
     return HttpUtil.processResponse(response);
   }
 
-  static Future<List<WorldEntity>> getList(Map<String, String> queryParams) async {
+  static Future<List<StoryEntity>> getList(Map<String, String> queryParams) async {
     final response = await HttpUtil.get(list, queryParams);
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonMap = json.decode(response.body);
       if (jsonMap['code'] == 200) {
         List<dynamic> jsonData = jsonMap['data'];
-        List<WorldEntity> values = parseList<WorldEntity>(json.encode(jsonData), (item) => WorldEntity.fromJson(item as Map<String, dynamic>));
+        List<StoryEntity> values = parseList<StoryEntity>(json.encode(jsonData), (item) => StoryEntity.fromJson(item as Map<String, dynamic>));
         return values;
       } else {
         throw Exception('Failed to load list: ${jsonMap['message']}');
@@ -48,13 +48,13 @@ class WorldApi {
     }
   }
 
-  static Future<List<WorldEntity>> getRandom(Map<String, dynamic> queryParams) async {
+  static Future<List<StoryEntity>> getRandom(Map<String, dynamic> queryParams) async {
     final response = await HttpUtil.get(random, queryParams);
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonMap = json.decode(response.body);
       if (jsonMap['code'] == 200) {
         List<dynamic> jsonData = jsonMap['data'];
-        List<WorldEntity> values = parseList<WorldEntity>(json.encode(jsonData), (item) => WorldEntity.fromJson(item as Map<String, dynamic>));
+        List<StoryEntity> values = parseList<StoryEntity>(json.encode(jsonData), (item) => StoryEntity.fromJson(item as Map<String, dynamic>));
         return values;
       } else {
         throw Exception('Failed to load list: ${jsonMap['message']}');
@@ -64,14 +64,14 @@ class WorldApi {
     }
   }
 
-  static Future<WorldEntity> getInfo(int id) async {
+  static Future<StoryEntity> getInfo(int id) async {
     final response = await HttpUtil.get("$info?id=$id");
 
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonMap = json.decode(response.body);
       if (jsonMap['code'] == 200) {
         Map<String, dynamic> jsonData = jsonMap['data'];
-        return WorldEntity.fromJson(jsonData);
+        return StoryEntity.fromJson(jsonData);
       } else {
         throw Exception('Failed to load info: ${jsonMap['message']}');
       }

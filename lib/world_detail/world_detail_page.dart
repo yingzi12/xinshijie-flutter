@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:xinshijie_flutter/api/comment_api.dart';
+import 'package:xinshijie_flutter/api/world_api.dart';
 import 'package:xinshijie_flutter/common/je_kit/lib/foundation/screen.dart';
+import 'package:xinshijie_flutter/model/comment_entity.dart';
+import 'package:xinshijie_flutter/model/world_comment.dart';
+import 'package:xinshijie_flutter/model/world_entity.dart';
 
 import 'package:xinshijie_flutter/public.dart';
 
-import 'novel_detail_header.dart';
-import 'novel_summary_view.dart';
-import 'novel_detail_toolbar.dart';
-import 'novel_detail_recommend_view.dart';
-import 'novel_detail_cell.dart';
-import 'novel_comment_cell.dart';
+import 'world_detail_header.dart';
+import 'world_summary_view.dart';
+import 'world_detail_toolbar.dart';
+import 'world_detail_recommend_view.dart';
+import 'world_detail_cell.dart';
+import 'world_comment_cell.dart';
 
-class NovelDetailPage extends StatefulWidget {
-  final String novelId;
+class WorldDetailPage extends StatefulWidget {
+  final int wId;
 
-  NovelDetailPage(this.novelId);
+  WorldDetailPage(this.wId);
 
   @override
-  NovelDetailPageState createState() => NovelDetailPageState();
+  WorldDetailPageState createState() => WorldDetailPageState();
 }
 
-class NovelDetailPageState extends State<NovelDetailPage> with RouteAware {
+class WorldDetailPageState extends State<WorldDetailPage> with RouteAware {
   Novel? novel;
-  List<Novel> recommendNovels = [];
-  List<NovelComment> comments = [];
+  List<Novel> recommendWorldS = [];
+  List<WorldComment> comments = [];
   ScrollController scrollController = ScrollController();
   double navAlpha = 0;
   bool isSummaryUnfold = false;
@@ -71,28 +76,29 @@ class NovelDetailPageState extends State<NovelDetailPage> with RouteAware {
     Navigator.pop(context);
   }
 
-  //获取小说详细
+  //获取世界详细
   fetchData() async {
-    var novelId = this.widget.novelId;
-
-    var novelResponse = await Request.post(action: 'novel_detail', params: {'id': novelId});
-
-    var commentsResponse = await Request.post(action: 'novel_comment', params: {'id': novelId});
-    List<NovelComment> comments = [];
-    commentsResponse.forEach((data) {
-      comments.add(NovelComment.fromJson(data));
-    });
-
-    var recommendResponse = await Request.post(action: 'novel_recommend', params: {'id': novelId});
-    List<Novel> recommendNovels = [];
+    var wId = this.widget.wId;
+    WorldEntity worldEntity= await WorldApi.getInfo(wId);
+    // var novelResponse = await Request.post(action: 'world_detail', params: {'id': novelId});
+    //停止
+    List<CommentEntity>  commentList= await CommentApi.getList({'wid': wId,'source':1});
+    // var commentsResponse = await Request.post(action: 'world_comment', params: {'id': novelId});
+    // List<WorldComment> comments = [];
+    // commentsResponse.forEach((data) {
+    //   comments.add(WorldComment.fromJson(data));
+    // });
+    //推荐
+    var recommendResponse = await Request.post(action: 'world_recommend', params: {'id': wId});
+    List<Novel> recommendWorldS = [];
     recommendResponse.forEach((data) {
-      recommendNovels.add(Novel.fromJson(data));
+      recommendWorldS.add(Novel.fromJson(data));
     });
 
     setState(() {
-      this.novel = Novel.fromJson(novelResponse);
+      this.novel = Novel.fromWorldEntity(worldEntity);
       this.comments = comments;
-      this.recommendNovels = recommendNovels;
+      this.recommendWorldS = recommendWorldS;
     });
   }
 
@@ -155,7 +161,7 @@ class NovelDetailPageState extends State<NovelDetailPage> with RouteAware {
           ),
           Divider(height: 1),
           Column(
-            children: comments.map((comment) => NovelCommentCell(comment)).toList(),
+            children: comments.map((comment) => WorldCommentCell(comment)).toList(),
           ),
           Container(
             padding: EdgeInsets.symmetric(vertical: 15),
@@ -212,15 +218,15 @@ class NovelDetailPageState extends State<NovelDetailPage> with RouteAware {
                     controller: scrollController,
                     padding: EdgeInsets.only(top: 0),
                     children: <Widget>[
-                      NovelDetailHeader(novel),
-                      NovelSummaryView(novel.introduction, isSummaryUnfold, changeSummaryMaxLines),
-                      NovelDetailCell(
+                      WorldDetailHeader(novel),
+                      WorldSummaryView(novel.introduction, isSummaryUnfold, changeSummaryMaxLines),
+                      WorldDetailCell(
                         iconName: 'img/detail_latest.png',
                         title: '最新',
                         subtitle: novel.lastChapter.title,
                         attachedWidget: Text(novel.status, style: TextStyle(fontSize: 14, color: novel.statusColor())),
                       ),
-                      NovelDetailCell(
+                      WorldDetailCell(
                         iconName: 'img/detail_chapter.png',
                         title: '目录',
                         subtitle: '共${novel.chapterCount}章',
@@ -229,11 +235,11 @@ class NovelDetailPageState extends State<NovelDetailPage> with RouteAware {
                       SizedBox(height: 10),
                       buildComment(),
                       SizedBox(height: 10),
-                      NovelDetailRecommendView(recommendNovels),
+                      WorldDetailRecommendView(recommendWorldS),
                     ],
                   ),
                 ),
-                NovelDetailToolbar(novel),
+                WorldDetailToolbar(novel),
               ],
             ),
             buildNavigationBar(),

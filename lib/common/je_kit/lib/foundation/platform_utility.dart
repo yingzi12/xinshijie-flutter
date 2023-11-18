@@ -1,4 +1,5 @@
-import 'package:device_info/device_info.dart';
+// import 'package:device_info/device_info.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 abstract class PlatformUtility {
   String get platformName;
@@ -9,6 +10,7 @@ abstract class PlatformUtility {
 }
 
 class PlatformUtilityIOS extends PlatformUtility {
+
   late IosDeviceInfo deviceInfo;
 
   @override

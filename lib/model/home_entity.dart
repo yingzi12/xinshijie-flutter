@@ -11,11 +11,13 @@
 
 class HomeEntity {
   HomeEntity({
-      List<BannerVo>? bannerList,
-      List<ModuleVo>? moduleList,}){
+    List<BannerVo>? bannerList,
+    List<ModuleVo>? moduleList,
+    List<HomeTabVo>? homesList,}){
     _bannerList = bannerList;
     _moduleList = moduleList;
-}
+    _homesList = homesList;
+  }
 
   HomeEntity.fromJson(dynamic json) {
     if (json['bannerList'] != null) {
@@ -30,16 +32,26 @@ class HomeEntity {
         _moduleList?.add(ModuleVo.fromJson(v));
       });
     }
+    if (json['homesList'] != null) {
+      _homesList = [];
+      json['homesList'].forEach((v) {
+        _homesList?.add(HomeTabVo.fromJson(v));
+      });
+    }
   }
   List<BannerVo>? _bannerList;
   List<ModuleVo>? _moduleList;
+  List<HomeTabVo>? _homesList;
   HomeEntity copyWith({  List<BannerVo>? bannerList,
-  List<ModuleVo>? moduleList,
-}) => HomeEntity(  bannerList: bannerList ?? _bannerList,
-  moduleList: moduleList ?? _moduleList,
-);
+    List<ModuleVo>? moduleList,
+    List<HomeTabVo>? homesList,
+  }) => HomeEntity(  bannerList: bannerList ?? _bannerList,
+    moduleList: moduleList ?? _moduleList,
+    homesList: homesList ?? _homesList,
+  );
   List<BannerVo>? get bannerList => _bannerList;
   List<ModuleVo>? get moduleList => _moduleList;
+  List<HomeTabVo>? get homesList => _homesList;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -48,6 +60,9 @@ class HomeEntity {
     }
     if (_moduleList != null) {
       map['moduleList'] = _moduleList?.map((v) => v.toJson()).toList();
+    }
+    if (_homesList != null) {
+      map['homesList'] = _homesList?.map((v) => v.toJson()).toList();
     }
     return map;
   }
@@ -195,7 +210,8 @@ class WorldRemVo {
       num? recSorting,
       String? wtype,
       String? wtag,
-      num? isOriginal,}){
+    num? status,
+    num? isOriginal,}){
     _id = id;
     _wid = wid;
     _wname = wname;
@@ -209,6 +225,7 @@ class WorldRemVo {
     _recSorting = recSorting;
     _wtype = wtype;
     _wtag = wtag;
+    _status = status;
     _isOriginal = isOriginal;
 }
 
@@ -226,6 +243,7 @@ class WorldRemVo {
     _recSorting = json['recSorting'];
     _wtype = json['wtype'];
     _wtag = json['wtag'];
+    _status=json['status'];
     _isOriginal = json['isOriginal'];
   }
   num? _id;
@@ -241,6 +259,7 @@ class WorldRemVo {
   num? _recSorting;
   String? _wtype;
   String? _wtag;
+  num? _status;
   num? _isOriginal;
   WorldRemVo copyWith({  num? id,
   num? wid,
@@ -269,7 +288,8 @@ class WorldRemVo {
   recSorting: recSorting ?? _recSorting,
   wtype: wtype ?? _wtype,
   wtag: wtag ?? _wtag,
-  isOriginal: isOriginal ?? _isOriginal,
+    status: status ?? _status,
+    isOriginal: isOriginal ?? _isOriginal,
 );
   num? get id => _id;
   num? get wid => _wid;
@@ -284,6 +304,7 @@ class WorldRemVo {
   num? get recSorting => _recSorting;
   String? get wtype => _wtype;
   String? get wtag => _wtag;
+  num? get status=>_status;
   num? get isOriginal => _isOriginal;
 
   Map<String, dynamic> toJson() {
@@ -301,6 +322,7 @@ class WorldRemVo {
     map['recSorting'] = _recSorting;
     map['wtype'] = _wtype;
     map['wtag'] = _wtag;
+    map['status']=_status;
     map['isOriginal'] = _isOriginal;
     return map;
   }
@@ -341,6 +363,7 @@ class StoryRemVo {
       String? stag,
       num? isOriginal,
       num? sid,
+    num? status,
       String? sname,}){
     _id = id;
     _wid = wid;
@@ -357,6 +380,7 @@ class StoryRemVo {
     _stag = stag;
     _isOriginal = isOriginal;
     _sid = sid;
+    _status = status;
     _sname = sname;
 }
 
@@ -376,6 +400,7 @@ class StoryRemVo {
     _stag = json['stag'];
     _isOriginal = json['isOriginal'];
     _sid = json['sid'];
+    _status =json['status'];
     _sname = json['sname'];
   }
   num? _id;
@@ -393,6 +418,7 @@ class StoryRemVo {
   String? _stag;
   num? _isOriginal;
   num? _sid;
+  num? _status;
   String? _sname;
   StoryRemVo copyWith({  num? id,
   num? wid,
@@ -409,6 +435,7 @@ class StoryRemVo {
   String? stag,
   num? isOriginal,
   num? sid,
+    num? status,
   String? sname,
 }) => StoryRemVo(  id: id ?? _id,
   wid: wid ?? _wid,
@@ -425,6 +452,7 @@ class StoryRemVo {
   stag: stag ?? _stag,
   isOriginal: isOriginal ?? _isOriginal,
   sid: sid ?? _sid,
+    status:status??_status,
   sname: sname ?? _sname,
 );
   num? get id => _id;
@@ -442,6 +470,7 @@ class StoryRemVo {
   String? get stag => _stag;
   num? get isOriginal => _isOriginal;
   num? get sid => _sid;
+  num? get status=> _status;
   String? get sname => _sname;
 
   Map<String, dynamic> toJson() {
@@ -461,6 +490,7 @@ class StoryRemVo {
     map['stag'] = _stag;
     map['isOriginal'] = _isOriginal;
     map['sid'] = _sid;
+    map['status'] =_status;
     map['sname'] = _sname;
     return map;
   }

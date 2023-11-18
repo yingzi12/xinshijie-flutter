@@ -8,7 +8,7 @@ import 'package:xinshijie_flutter/utils/HttpStatusCodes.dart';
 class HttpUtil {
 
   static const Map<String, String> _defaultHeaders = {
-    "Content-Type": "application/json",
+    "Content-Type": "application/json;charset=utf-8;",
   };
   // static Future<http.Response> get(String path) async {
   //   final Uri uri = Uri.parse( baseUrl+ path);
@@ -16,14 +16,14 @@ class HttpUtil {
   //
   //   return response;
   // }
-  static Future<http.Response> get(String path, [Map<String, String>? queryParams]) async {
+  static Future<http.Response> get(String path, [Map<String, dynamic>? queryParams]) async {
     final Uri uri = Uri.parse(baseUrl + path).replace(queryParameters: queryParams);
     return await http.get(uri);
   }
 
 
 
-  static Future<http.Response> post(String path, Map<String, String> body) async {
+  static Future<http.Response> post(String path, Map<String, dynamic> body) async {
     final Uri uri = Uri.parse(baseUrl + path);
     return await http.post(uri, body: body, headers: _defaultHeaders);
   }

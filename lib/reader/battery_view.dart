@@ -1,6 +1,6 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:battery/battery.dart';
-import 'package:device_info/device_info.dart';
 import 'dart:io';
 
 import 'package:xinshijie_flutter/public.dart';

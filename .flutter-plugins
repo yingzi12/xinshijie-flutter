@@ -1,7 +1,7 @@
 # This is a generated file; do not edit or check into version control.
 battery=/Users/luhuang/.pub-cache/hosted/pub.dev/battery-2.0.3/
 connectivity_plus=/Users/luhuang/.pub-cache/hosted/pub.dev/connectivity_plus-5.0.1/
-device_info=/Users/luhuang/.pub-cache/hosted/pub.dev/device_info-2.0.3/
+device_info_plus=/Users/luhuang/.pub-cache/hosted/pub.dev/device_info_plus-9.1.0/
 flutter_secure_storage=/Users/luhuang/.pub-cache/hosted/pub.dev/flutter_secure_storage-9.0.0/
 flutter_secure_storage_linux=/Users/luhuang/.pub-cache/hosted/pub.dev/flutter_secure_storage_linux-1.2.0/
 flutter_secure_storage_macos=/Users/luhuang/.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.0.1/
@@ -29,7 +29,7 @@ shared_preferences_windows=/Users/luhuang/.pub-cache/hosted/pub.dev/shared_prefe
 sqflite=/Users/luhuang/.pub-cache/hosted/pub.dev/sqflite-2.3.0/
 url_launcher=/Users/luhuang/.pub-cache/hosted/pub.dev/url_launcher-6.2.1/
 url_launcher_android=/Users/luhuang/.pub-cache/hosted/pub.dev/url_launcher_android-6.2.0/
-url_launcher_ios=/Users/luhuang/.pub-cache/hosted/pub.dev/url_launcher_ios-6.2.0/
+url_launcher_ios=/Users/luhuang/.pub-cache/hosted/pub.dev/url_launcher_ios-6.2.1/
 url_launcher_linux=/Users/luhuang/.pub-cache/hosted/pub.dev/url_launcher_linux-3.1.0/
 url_launcher_macos=/Users/luhuang/.pub-cache/hosted/pub.dev/url_launcher_macos-3.1.0/
 url_launcher_web=/Users/luhuang/.pub-cache/hosted/pub.dev/url_launcher_web-2.2.0/

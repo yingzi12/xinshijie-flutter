@@ -72,10 +72,10 @@ class HomeListViewState extends State<HomeListView> with AutomaticKeepAliveClien
           break;
       }
       //返回模块数据
-      var responseJson = await Request.get(action: action);
+      // var responseJson = await Request.get(action: action);
       HomeEntity homeEntity  =await HomeApi.getWorld(kind);
       List<BannerVo> bannerList =homeEntity.bannerList?? [];
-      List<HomeTabVo> homeList = [];
+      List<HomeTabVo> homeList = homeEntity.homesList?? [];
       // List moduleData = responseJson['module'];
       List<HomeModule> modules = [];
       modules.add(HomeModule.fromBanner(bannerList));

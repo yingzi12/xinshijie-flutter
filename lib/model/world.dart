@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:xinshijie_flutter/app/sq_color.dart';
 import 'package:xinshijie_flutter/model/home_entity.dart';
-import 'package:xinshijie_flutter/model/world_entity.dart';
 import 'package:xinshijie_flutter/utils/constant.dart';
 
 import 'chapter.dart';
 
-class Novel {
+class World {
   late String id;
   late String name;
   late String imgUrl;
@@ -28,7 +27,7 @@ class Novel {
   late List<String> tags;
   late bool isLimitedFree;
 
-  Novel.fromJson(Map data) {
+  World.fromJson(Map data) {
     id = data['bid'] ?? '';
     firstArticleId = data['first_article_id'] ?? 0;
     name = data['bookname'];
@@ -65,7 +64,7 @@ class Novel {
     return status == '连载' ? SQColor.blue : SQColor.primary;
   }
 
-  Novel.fromStroy(StoryRemVo remVo){
+  World.fromStroy(StoryRemVo remVo){
     id=remVo.sid! as String;
     imgUrl=remVo.imgUrl?? "image/empty.jpg";
     author=remVo.createName??"未知";
@@ -88,7 +87,7 @@ class Novel {
     recommendCount=0;
   }
 
-  Novel.fromWorld(WorldRemVo remVo){
+  World.fromWorld(WorldRemVo remVo){
     id=remVo.wid!.toString();
     imgUrl=remVo.imgUrl?? "img/empty.png";
     author=remVo.createName??"未知";
@@ -109,31 +108,6 @@ class Novel {
       tags = ["其他"];
     }else{
       tags=remVo.wtag!.split(",");
-    }
-    recommendCount=0;
-  }
-
-  Novel.fromWorldEntity(WorldEntity remVo){
-    id=remVo.id!.toString();
-    imgUrl=remVo.imgUrl?? "img/empty.png";
-    author=remVo.createName??"未知";
-    name=remVo.name!;
-    introduction=remVo.intro??"无";
-    introduction=introduction.trim();
-    if(remVo.typeName ==null || remVo.typeName!.isEmpty  )
-      type="其他";
-    else
-      type=remVo.typeName!;
-
-    if(remVo.status!=null)
-      status=worldStatusMap[remVo!.status]??"其他";
-    else
-      status="其他";
-
-    if (remVo.tags == null || remVo.tags!.isEmpty ) {
-      tags = ["其他"];
-    }else{
-      tags=remVo.tags!.split(",");
     }
     recommendCount=0;
   }
