@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'home_model.dart';
+import 'package:xinshijie_flutter/model/home_model.dart';
 import 'home_section_view.dart';
 import 'home_novel_cover_view.dart';
 

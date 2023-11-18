@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'novel_grid_item.dart';
 import 'home_section_view.dart';
 import 'home_novel_cover_view.dart';
-import 'home_model.dart';
+import 'package:xinshijie_flutter/model/home_model.dart';
 
 class NovelSecondHybirdCard extends StatelessWidget {
   final HomeModule cardInfo;

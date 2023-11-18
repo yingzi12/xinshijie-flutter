@@ -1,8 +1,7 @@
 import 'dart:convert';
 
-import 'package:http/http.dart';
+import 'package:xinshijie_flutter/model/world_model.dart';
 import 'package:xinshijie_flutter/utils/HttpUtil.dart';
-import 'package:xinshijie_flutter/vo/WorldVo.dart';
 
 class WorldApi {
 

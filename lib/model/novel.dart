@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xinshijie_flutter/app/sq_color.dart';
+import 'package:xinshijie_flutter/model/home_entity.dart';
 
 import 'chapter.dart';
 
@@ -60,5 +61,33 @@ class Novel {
 
   Color statusColor() {
     return status == '连载' ? SQColor.blue : SQColor.primary;
+  }
+
+  Novel.fromStroy(StoryRemVo remVo){
+    id=remVo.sid! as String;
+    imgUrl=remVo.imgUrl?? "image/empty.jpg";
+    type=remVo.stype?? "其他";
+    author=remVo.createName??"未知";
+    name=remVo.sname!;
+    if (remVo.stag == null || remVo.stag!.isEmpty) {
+      tags = ["其他"];
+    }else{
+      tags=remVo.stag!.split(",");
+    }
+    recommendCount=0;
+  }
+
+  Novel.fromWorld(WorldRemVo remVo){
+    id=remVo.wid! as String;
+    imgUrl=remVo.imgUrl?? "image/empty.jpg";
+    type=remVo.wtype?? "其他";
+    author=remVo.createName??"未知";
+    name=remVo.wname!;
+    if (remVo.wtag == null || remVo.wtag!.isEmpty) {
+      tags = ["其他"];
+    }else{
+      tags=remVo.wtag!.split(",");
+    }
+    recommendCount=0;
   }
 }

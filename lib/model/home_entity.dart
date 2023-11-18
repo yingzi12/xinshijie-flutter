@@ -11,8 +11,8 @@
 
 class HomeEntity {
   HomeEntity({
-      List<BannerList>? bannerList, 
-      List<ModuleList>? moduleList,}){
+      List<BannerVo>? bannerList,
+      List<ModuleVo>? moduleList,}){
     _bannerList = bannerList;
     _moduleList = moduleList;
 }
@@ -21,25 +21,25 @@ class HomeEntity {
     if (json['bannerList'] != null) {
       _bannerList = [];
       json['bannerList'].forEach((v) {
-        _bannerList?.add(BannerList.fromJson(v));
+        _bannerList?.add(BannerVo.fromJson(v));
       });
     }
     if (json['moduleList'] != null) {
       _moduleList = [];
       json['moduleList'].forEach((v) {
-        _moduleList?.add(ModuleList.fromJson(v));
+        _moduleList?.add(ModuleVo.fromJson(v));
       });
     }
   }
-  List<BannerList>? _bannerList;
-  List<ModuleList>? _moduleList;
-  HomeEntity copyWith({  List<BannerList>? bannerList,
-  List<ModuleList>? moduleList,
+  List<BannerVo>? _bannerList;
+  List<ModuleVo>? _moduleList;
+  HomeEntity copyWith({  List<BannerVo>? bannerList,
+  List<ModuleVo>? moduleList,
 }) => HomeEntity(  bannerList: bannerList ?? _bannerList,
   moduleList: moduleList ?? _moduleList,
 );
-  List<BannerList>? get bannerList => _bannerList;
-  List<ModuleList>? get moduleList => _moduleList;
+  List<BannerVo>? get bannerList => _bannerList;
+  List<ModuleVo>? get moduleList => _moduleList;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -64,17 +64,17 @@ class HomeEntity {
 /// storyList : [{"id":0,"wid":0,"wname":"","intro":"","recType":0,"imgUrl":"","comments":"","crateTime":"","createBy":0,"createName":"","recSorting":0,"stype":"","stag":"","isOriginal":0,"sid":0,"sname":""}]
 /// worldList : [{"id":0,"wid":0,"wname":"","intro":"","recType":0,"imgUrl":"","comments":"","crateTime":"","createBy":0,"createName":"","recSorting":0,"wtype":"","wtag":"","isOriginal":0}]
 
-class ModuleList {
-  ModuleList({
-      num? id, 
-      String? name, 
-      String? mclass, 
-      String? style, 
-      num? isFeed, 
-      num? stauts, 
-      num? kind, 
-      List<StoryList>? storyList, 
-      List<WorldList>? worldList,}){
+class ModuleVo {
+  ModuleVo({
+      num? id,
+      String? name,
+      String? mclass,
+      num? style,
+      num? isFeed,
+      num? stauts,
+      num? kind,
+      List<StoryRemVo>? storyList,
+      List<WorldRemVo>? worldList,}){
     _id = id;
     _name = name;
     _mclass = mclass;
@@ -86,7 +86,7 @@ class ModuleList {
     _worldList = worldList;
 }
 
-  ModuleList.fromJson(dynamic json) {
+  ModuleVo.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
     _mclass = json['mclass'];
@@ -97,35 +97,35 @@ class ModuleList {
     if (json['storyList'] != null) {
       _storyList = [];
       json['storyList'].forEach((v) {
-        _storyList?.add(StoryList.fromJson(v));
+        _storyList?.add(StoryRemVo.fromJson(v));
       });
     }
     if (json['worldList'] != null) {
       _worldList = [];
       json['worldList'].forEach((v) {
-        _worldList?.add(WorldList.fromJson(v));
+        _worldList?.add(WorldRemVo.fromJson(v));
       });
     }
   }
   num? _id;
   String? _name;
   String? _mclass;
-  String? _style;
+  num? _style;
   num? _isFeed;
   num? _stauts;
   num? _kind;
-  List<StoryList>? _storyList;
-  List<WorldList>? _worldList;
-ModuleList copyWith({  num? id,
+  List<StoryRemVo>? _storyList;
+  List<WorldRemVo>? _worldList;
+  ModuleVo copyWith({  num? id,
   String? name,
   String? mclass,
-  String? style,
+    num? style,
   num? isFeed,
   num? stauts,
   num? kind,
-  List<StoryList>? storyList,
-  List<WorldList>? worldList,
-}) => ModuleList(  id: id ?? _id,
+  List<StoryRemVo>? storyList,
+  List<WorldRemVo>? worldList,
+}) => ModuleVo(  id: id ?? _id,
   name: name ?? _name,
   mclass: mclass ?? _mclass,
   style: style ?? _style,
@@ -138,12 +138,12 @@ ModuleList copyWith({  num? id,
   num? get id => _id;
   String? get name => _name;
   String? get mclass => _mclass;
-  String? get style => _style;
+  num? get style => _style;
   num? get isFeed => _isFeed;
   num? get stauts => _stauts;
   num? get kind => _kind;
-  List<StoryList>? get storyList => _storyList;
-  List<WorldList>? get worldList => _worldList;
+  List<StoryRemVo>? get storyList => _storyList;
+  List<WorldRemVo>? get worldList => _worldList;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -180,21 +180,21 @@ ModuleList copyWith({  num? id,
 /// wtag : ""
 /// isOriginal : 0
 
-class WorldList {
-  WorldList({
-      num? id, 
-      num? wid, 
-      String? wname, 
-      String? intro, 
-      num? recType, 
-      String? imgUrl, 
-      String? comments, 
-      String? crateTime, 
-      num? createBy, 
-      String? createName, 
-      num? recSorting, 
-      String? wtype, 
-      String? wtag, 
+class WorldRemVo {
+  WorldRemVo({
+      num? id,
+      num? wid,
+      String? wname,
+      String? intro,
+      num? recType,
+      String? imgUrl,
+      String? comments,
+      String? crateTime,
+      num? createBy,
+      String? createName,
+      num? recSorting,
+      String? wtype,
+      String? wtag,
       num? isOriginal,}){
     _id = id;
     _wid = wid;
@@ -212,7 +212,7 @@ class WorldList {
     _isOriginal = isOriginal;
 }
 
-  WorldList.fromJson(dynamic json) {
+  WorldRemVo.fromJson(dynamic json) {
     _id = json['id'];
     _wid = json['wid'];
     _wname = json['wname'];
@@ -242,7 +242,7 @@ class WorldList {
   String? _wtype;
   String? _wtag;
   num? _isOriginal;
-WorldList copyWith({  num? id,
+  WorldRemVo copyWith({  num? id,
   num? wid,
   String? wname,
   String? intro,
@@ -256,7 +256,7 @@ WorldList copyWith({  num? id,
   String? wtype,
   String? wtag,
   num? isOriginal,
-}) => WorldList(  id: id ?? _id,
+}) => WorldRemVo(  id: id ?? _id,
   wid: wid ?? _wid,
   wname: wname ?? _wname,
   intro: intro ?? _intro,
@@ -324,23 +324,23 @@ WorldList copyWith({  num? id,
 /// sid : 0
 /// sname : ""
 
-class StoryList {
-  StoryList({
-      num? id, 
-      num? wid, 
-      String? wname, 
-      String? intro, 
-      num? recType, 
-      String? imgUrl, 
-      String? comments, 
-      String? crateTime, 
-      num? createBy, 
-      String? createName, 
-      num? recSorting, 
-      String? stype, 
-      String? stag, 
-      num? isOriginal, 
-      num? sid, 
+class StoryRemVo {
+  StoryRemVo({
+      num? id,
+      num? wid,
+      String? wname,
+      String? intro,
+      num? recType,
+      String? imgUrl,
+      String? comments,
+      String? crateTime,
+      num? createBy,
+      String? createName,
+      num? recSorting,
+      String? stype,
+      String? stag,
+      num? isOriginal,
+      num? sid,
       String? sname,}){
     _id = id;
     _wid = wid;
@@ -360,7 +360,7 @@ class StoryList {
     _sname = sname;
 }
 
-  StoryList.fromJson(dynamic json) {
+  StoryRemVo.fromJson(dynamic json) {
     _id = json['id'];
     _wid = json['wid'];
     _wname = json['wname'];
@@ -394,7 +394,7 @@ class StoryList {
   num? _isOriginal;
   num? _sid;
   String? _sname;
-StoryList copyWith({  num? id,
+  StoryRemVo copyWith({  num? id,
   num? wid,
   String? wname,
   String? intro,
@@ -410,7 +410,7 @@ StoryList copyWith({  num? id,
   num? isOriginal,
   num? sid,
   String? sname,
-}) => StoryList(  id: id ?? _id,
+}) => StoryRemVo(  id: id ?? _id,
   wid: wid ?? _wid,
   wname: wname ?? _wname,
   intro: intro ?? _intro,
@@ -475,14 +475,14 @@ StoryList copyWith({  num? id,
 /// reason : ""
 /// kind : 0
 
-class BannerList {
-  BannerList({
-      num? id, 
-      String? linkText, 
-      String? linkUrl, 
-      String? imageUrl, 
-      String? type, 
-      String? reason, 
+class BannerVo {
+  BannerVo({
+      num? id,
+      String? linkText,
+      String? linkUrl,
+      String? imageUrl,
+      String? type,
+      String? reason,
       num? kind,}){
     _id = id;
     _linkText = linkText;
@@ -493,7 +493,7 @@ class BannerList {
     _kind = kind;
 }
 
-  BannerList.fromJson(dynamic json) {
+  BannerVo.fromJson(dynamic json) {
     _id = json['id'];
     _linkText = json['linkText'];
     _linkUrl = json['linkUrl'];
@@ -509,14 +509,14 @@ class BannerList {
   String? _type;
   String? _reason;
   num? _kind;
-BannerList copyWith({  num? id,
+  BannerVo copyWith({  num? id,
   String? linkText,
   String? linkUrl,
   String? imageUrl,
   String? type,
   String? reason,
   num? kind,
-}) => BannerList(  id: id ?? _id,
+}) => BannerVo(  id: id ?? _id,
   linkText: linkText ?? _linkText,
   linkUrl: linkUrl ?? _linkUrl,
   imageUrl: imageUrl ?? _imageUrl,
@@ -537,6 +537,76 @@ BannerList copyWith({  num? id,
     map['id'] = _id;
     map['linkText'] = _linkText;
     map['linkUrl'] = _linkUrl;
+    map['imageUrl'] = _imageUrl;
+    map['type'] = _type;
+    map['reason'] = _reason;
+    map['kind'] = _kind;
+    return map;
+  }
+
+}
+class HomeTabVo {
+  HomeTabVo({
+    num? id,
+    String? title,
+    String? icon,
+    String? imageUrl,
+    String? type,
+    String? reason,
+    num? kind,}){
+    _id = id;
+    _title = title;
+    _icon = icon;
+    _imageUrl = imageUrl;
+    _type = type;
+    _reason = reason;
+    _kind = kind;
+  }
+
+  HomeTabVo.fromJson(dynamic json) {
+    _id = json['id'];
+    _title = json['title'];
+    _icon = json['icon'];
+    _imageUrl = json['imageUrl'];
+    _type = json['type'];
+    _reason = json['reason'];
+    _kind = json['kind'];
+  }
+  num? _id;
+  String? _title;
+  String? _icon;
+  String? _imageUrl;
+  String? _type;
+  String? _reason;
+  num? _kind;
+  HomeTabVo copyWith({  num? id,
+    String? title,
+    String? icon,
+    String? imageUrl,
+    String? type,
+    String? reason,
+    num? kind,
+  }) => HomeTabVo(  id: id ?? _id,
+    title: title ?? _title,
+    icon: icon ?? _icon,
+    imageUrl: imageUrl ?? _imageUrl,
+    type: type ?? _type,
+    reason: reason ?? _reason,
+    kind: kind ?? _kind,
+  );
+  num? get id => _id;
+  String? get title => _title;
+  String? get icon => _icon;
+  String? get imageUrl => _imageUrl;
+  String? get type => _type;
+  String? get reason => _reason;
+  num? get kind => _kind;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['title'] = _title;
+    map['icon'] = _icon;
     map['imageUrl'] = _imageUrl;
     map['type'] = _type;
     map['reason'] = _reason;

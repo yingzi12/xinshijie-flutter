@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:xinshijie_flutter/common/je_kit/lib/foundation/screen.dart';
 
 import 'package:xinshijie_flutter/public.dart';
-import 'world_model.dart';
+import '../model/home_model.dart';
 
 class HomeBanner extends StatelessWidget {
   final List<CarouselInfo> carouselInfos;

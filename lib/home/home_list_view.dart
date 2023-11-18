@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:xinshijie_flutter/common/je_kit/lib/widget/toast.dart';
+import 'package:xinshijie_flutter/model/home_model.dart';
 
 import 'package:xinshijie_flutter/public.dart';
 
-import 'home_model.dart';
 import 'home_banner.dart';
 import 'home_menu.dart';
 import 'novel_normal_card.dart';

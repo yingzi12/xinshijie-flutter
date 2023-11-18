@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:xinshijie_flutter/api/home_api.dart';
 import 'package:xinshijie_flutter/common/je_kit/lib/widget/toast.dart';
+import 'package:xinshijie_flutter/model/home_entity.dart';
 
 import 'package:xinshijie_flutter/public.dart';
 
-import 'world_model.dart';
+import '../model/home_model.dart';
 import 'world_banner.dart';
 import 'world_menu.dart';
 import 'world_normal_card.dart';
@@ -46,28 +48,42 @@ class HomeListViewState extends State<HomeListView> with AutomaticKeepAliveClien
   Future<void> fetchData() async {
     try {
       late var action;
+      late var kind=1;
       switch (this.widget.type) {
         case HomeListType.excellent:
           action = 'home_excellent';
+          kind=1;
           break;
         case HomeListType.female:
           action = 'home_female';
+          kind=2;
+
           break;
         case HomeListType.male:
           action = 'home_male';
+          kind=3;
+
           break;
         case HomeListType.cartoon:
           action = 'home_cartoon';
+          kind=4;
           break;
         default:
           break;
       }
       //返回模块数据
       var responseJson = await Request.get(action: action);
-      List moduleData = responseJson['module'];
+      HomeEntity homeEntity  =await HomeApi.getWorld(kind);
+      List<BannerVo> bannerList =homeEntity.bannerList?? [];
+      List<HomeTabVo> homeList = [];
+      // List moduleData = responseJson['module'];
       List<HomeModule> modules = [];
-      moduleData.forEach((data) {
-        modules.add(HomeModule.fromJson(data));
+      modules.add(HomeModule.fromBanner(bannerList));
+      if(homeList.length>0) {
+        modules.add(HomeModule.fromHome(homeList));
+      }
+      homeEntity.moduleList!.forEach((data) {
+        modules.add(HomeModule.fromModuleVo(data));
       });
 
       setState(() {

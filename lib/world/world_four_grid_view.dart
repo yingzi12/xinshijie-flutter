@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'world_model.dart';
+import '../model/home_model.dart';
 import 'world_section_view.dart';
 import 'world_novel_cover_view.dart';
 

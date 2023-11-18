@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:xinshijie_flutter/public.dart';
 
-import 'world_model.dart';
+import '../model/home_model.dart';
 
 class HomeMenu extends StatelessWidget {
   final List<MenuInfo> infos;
