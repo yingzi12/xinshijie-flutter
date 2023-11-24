@@ -13,7 +13,7 @@ class HomeWorldCoverView extends StatelessWidget {
     var width = (Screen.width - 15 * 2 - 15 * 3) / 4;
     return GestureDetector(
       onTap: () {
-        AppNavigator.pushWorldDetail(context, world);
+        AppNavigator.pushWorldDetail(context, world.id);
       },
       child: Container(
         width: width,

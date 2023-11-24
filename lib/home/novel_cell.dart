@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import 'package:xinshijie_flutter/public.dart';
 
@@ -11,7 +12,7 @@ class NovelCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        AppNavigator.pushNovelDetail(context, novel);
+        AppNavigator.pushNovelDetail(context,novel.wid, novel.id!.toInt());
       },
       child: Container(
         padding: EdgeInsets.all(15),

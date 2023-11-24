@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:xinshijie_flutter/chapter/chapter_list_page.dart';
+import 'package:xinshijie_flutter/element/element_detail_page.dart';
+import 'package:xinshijie_flutter/element/element_list_page.dart';
+import 'package:xinshijie_flutter/model/element_entity.dart';
 import 'package:xinshijie_flutter/model/world.dart';
 
 import 'package:xinshijie_flutter/public.dart';
@@ -6,7 +10,11 @@ import 'package:xinshijie_flutter/public.dart';
 import 'package:xinshijie_flutter/novel_detail/novel_detail_page.dart';
 import 'package:xinshijie_flutter/me/login_page.dart';
 import 'package:xinshijie_flutter/me/web_page.dart';
+import 'package:xinshijie_flutter/ranking/ranking_list_page.dart';
+import 'package:xinshijie_flutter/ranking_story/story_all_list_page.dart';
+import 'package:xinshijie_flutter/ranking_story/story_list_page.dart';
 import 'package:xinshijie_flutter/reader/reader_page.dart';
+import 'package:xinshijie_flutter/story_detail/story_detail_page.dart';
 import 'package:xinshijie_flutter/world_detail/world_detail_page.dart';
 
 class AppNavigator {
@@ -19,12 +27,38 @@ class AppNavigator {
     );
   }
 
-  static pushNovelDetail(BuildContext context, Novel novel) {
-    AppNavigator.push(context, NovelDetailPage(novel.id));
+  static pushNovelDetail(BuildContext context, int wid,int sid) {
+    AppNavigator.push(context, NovelDetailPage(wid,sid));
   }
 
-  static pushWorldDetail(BuildContext context, World world) {
-    AppNavigator.push(context, WorldDetailPage( int.parse(world.id)));
+  static pushStoryDetail(BuildContext context, int wid,int sid) {
+    AppNavigator.push(context, StoryDetailPage(wid,sid));
+  }
+  static pushWorldDetail(BuildContext context,  int wid) {
+    AppNavigator.push(context, WorldDetailPage( wid));
+  }
+  static pushElementEntityDetail(BuildContext context, int wid,String wname) {
+    AppNavigator.push(context, WorldDetailPage( wid));
+  }
+
+  static pushElementList(BuildContext context, int wid,String wname) {
+    AppNavigator.push(context, ElementListPage( wid));
+  }
+
+  static pushStoryAllList(BuildContext context) {
+    AppNavigator.push(context, StoryAllListPage());
+  }
+
+  static pushStoryList(BuildContext context, int wid,String wname) {
+    AppNavigator.push(context, StoryListPage( wid,wname));
+  }
+
+  static pushReankingList(BuildContext context) {
+    AppNavigator.push(context, RankingListPage( ));
+  }
+
+  static pushElementDetail(BuildContext context, int wid,int eid) {
+    AppNavigator.push(context, ElementDetailPage( wid:1, eid: 1));
   }
 
   static pushLogin(BuildContext context) {
@@ -36,6 +70,12 @@ class AppNavigator {
   static pushWeb(BuildContext context, String url, String title) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return WebPage(url: url, title: title);
+    }));
+  }
+
+  static pushChapterList(BuildContext context, int wid,int sid) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ChapterListPage(wid:1,sid: 1);
     }));
   }
 

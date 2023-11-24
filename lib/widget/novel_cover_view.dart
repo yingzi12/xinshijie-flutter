@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import 'package:xinshijie_flutter/model/novel.dart';
 import 'package:xinshijie_flutter/widget/novel_cover_image.dart';
@@ -13,7 +14,7 @@ class NovelCoverView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        AppNavigator.pushNovelDetail(context, novel);
+        AppNavigator.pushNovelDetail(context, novel.wid,novel.id.toInt());
       },
       child: Container(
         width: 90,

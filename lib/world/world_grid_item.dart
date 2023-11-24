@@ -14,7 +14,7 @@ class WorldGridItem extends StatelessWidget {
     var width = (Screen.width - 15 * 2 - 15) / 2;
     return GestureDetector(
       onTap: () {
-        AppNavigator.pushWorldDetail(context, this.world);
+        AppNavigator.pushWorldDetail(context, this.world.id);
       },
       child: Container(
         width: width,

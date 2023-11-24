@@ -7,6 +7,7 @@ import 'package:xinshijie_flutter/public.dart';
 import 'package:xinshijie_flutter/home/home_scene.dart';
 import 'package:xinshijie_flutter/bookshelf/bookshelf_scene.dart';
 import 'package:xinshijie_flutter/me/me_page.dart';
+import 'package:xinshijie_flutter/story/story_home.dart';
 import 'package:xinshijie_flutter/world/world_home.dart';
 
 class RootPage extends StatefulWidget {
@@ -77,7 +78,7 @@ class RootPageState extends State<RootPage> {
         children: <Widget>[
           BookshelfPage(),
           WorldPage(),
-          HomePage(),
+          StoryPage(),
           MePage(),
         ],
         index: _tabIndex,

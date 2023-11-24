@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:xinshijie_flutter/common/je_kit/lib/foundation/screen.dart';
 
 import 'package:xinshijie_flutter/public.dart';
@@ -12,9 +13,10 @@ import 'novel_detail_cell.dart';
 import 'novel_comment_cell.dart';
 
 class NovelDetailPage extends StatefulWidget {
-  final String novelId;
+  final int wid;
+  final int sid;
 
-  NovelDetailPage(this.novelId);
+  NovelDetailPage(this.wid,this.sid);
 
   @override
   NovelDetailPageState createState() => NovelDetailPageState();
@@ -73,17 +75,17 @@ class NovelDetailPageState extends State<NovelDetailPage> with RouteAware {
 
   //获取小说详细
   fetchData() async {
-    var novelId = this.widget.novelId;
+    var novelId = this.widget.sid;
 
-    var novelResponse = await Request.post(action: 'novel_detail', params: {'id': novelId});
+    var novelResponse = await Request.post(action: 'novel_detail', params: {'id': novelId.toString()});
 
-    var commentsResponse = await Request.post(action: 'novel_comment', params: {'id': novelId});
+    var commentsResponse = await Request.post(action: 'novel_comment', params: {'id': novelId.toString()});
     List<NovelComment> comments = [];
     commentsResponse.forEach((data) {
       comments.add(NovelComment.fromJson(data));
     });
 
-    var recommendResponse = await Request.post(action: 'novel_recommend', params: {'id': novelId});
+    var recommendResponse = await Request.post(action: 'novel_recommend', params: {'id': novelId.toString()});
     List<Novel> recommendNovels = [];
     recommendResponse.forEach((data) {
       recommendNovels.add(Novel.fromJson(data));
@@ -215,12 +217,16 @@ class NovelDetailPageState extends State<NovelDetailPage> with RouteAware {
                       NovelDetailHeader(novel),
                       NovelSummaryView(novel.introduction, isSummaryUnfold, changeSummaryMaxLines),
                       NovelDetailCell(
+                        sid:(novel.id??"-1").toInt(),
+                        wid: novel.wid??1,
                         iconName: 'img/detail_latest.png',
                         title: '最新',
                         subtitle: novel.lastChapter.title,
                         attachedWidget: Text(novel.status, style: TextStyle(fontSize: 14, color: novel.statusColor())),
                       ),
                       NovelDetailCell(
+                        sid:(novel.id??"-1").toInt(),
+                        wid:novel.wid??1,
                         iconName: 'img/detail_chapter.png',
                         title: '目录',
                         subtitle: '共${novel.chapterCount}章',

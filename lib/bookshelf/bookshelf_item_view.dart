@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:xinshijie_flutter/common/je_kit/lib/foundation/screen.dart';
 
 import 'package:xinshijie_flutter/public.dart';
@@ -12,7 +13,7 @@ class BookshelfItemView extends StatelessWidget {
     var width = (Screen.width - 15 * 2 - 24 * 2) / 3;
     return GestureDetector(
       onTap: () {
-        AppNavigator.pushNovelDetail(context, novel);
+        AppNavigator.pushNovelDetail(context,novel.wid, novel.id.toInt());
       },
       child: Container(
         width: width,

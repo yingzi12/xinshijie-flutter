@@ -1,20 +1,19 @@
 import 'dart:convert';
 
+import 'package:xinshijie_flutter/model/element_entity.dart';
 import 'package:xinshijie_flutter/model/world_model.dart';
 import 'package:xinshijie_flutter/utils/HttpUtil.dart';
 
 class ElementApi {
 
   // 类变量（静态变量）
-  static String info ="/wiki/element/info";
+  static String info ="/wiki/element/getInfo";
 
   static String list ="/wiki/element/list";
 
   static String add ="/wiki/element/add";
 
-
   static String del ="/wiki/element/del";
-
 
   static String edit ="/wiki/element/edit";
 
@@ -28,13 +27,13 @@ class ElementApi {
     return HttpUtil.processResponse(response);
   }
 
-  static Future<List<WorldVo>> getList(Map<String, String> queryParams) async {
+  static Future<List<ElementEntity>> getList(Map<String, String> queryParams) async {
     final response = await HttpUtil.get(list, queryParams);
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonMap = json.decode(response.body);
       if (jsonMap['code'] == 200) {
         List<dynamic> jsonData = jsonMap['data'];
-        List<WorldVo> values = parseList<WorldVo>(json.encode(jsonData), (item) => WorldVo.fromJson(item as Map<String, dynamic>));
+        List<ElementEntity> values = parseList<ElementEntity>(json.encode(jsonData), (item) => ElementEntity.fromJson(item as Map<String, dynamic>));
         return values;
       } else {
         throw Exception('Failed to load list: ${jsonMap['message']}');
@@ -44,14 +43,15 @@ class ElementApi {
     }
   }
 
-  static Future<WorldVo> getInfo(int id) async {
-    final response = await HttpUtil.get("$info?id=$id");
+  static Future<ElementEntity> getInfo(int wid,int eid) async {
+    final url="$info?wid=$wid&eid=$eid";
+    final response = await HttpUtil.get(url);
 
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonMap = json.decode(response.body);
       if (jsonMap['code'] == 200) {
         Map<String, dynamic> jsonData = jsonMap['data'];
-        return WorldVo.fromJson(jsonData);
+        return ElementEntity.fromJson(jsonData);
       } else {
         throw Exception('Failed to load info: ${jsonMap['message']}');
       }

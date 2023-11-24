@@ -14,13 +14,12 @@ import 'world_detail_header.dart';
 import 'world_summary_view.dart';
 import 'world_detail_toolbar.dart';
 import 'world_detail_recommend_view.dart';
-import 'world_detail_cell.dart';
 import 'world_comment_cell.dart';
 
 class WorldDetailPage extends StatefulWidget {
-  final int wId;
+  final int wid;
 
-  WorldDetailPage(this.wId);
+  WorldDetailPage(this.wid);
 
   @override
   WorldDetailPageState createState() => WorldDetailPageState();
@@ -79,7 +78,7 @@ class WorldDetailPageState extends State<WorldDetailPage> with RouteAware {
 
   //获取世界详细
   fetchData() async {
-    var wId = this.widget.wId;
+    var wId = this.widget.wid;
     WorldEntity worldEntity= await WorldApi.getInfo(wId);
     // var worldResponse = await Request.post(action: 'world_detail', params: {'id': worldId});
     //停止
@@ -227,12 +226,21 @@ class WorldDetailPageState extends State<WorldDetailPage> with RouteAware {
                         iconName: 'img/detail_latest.png',
                         title: '最新',
                         subtitle: world.lastChapter?.title ?? '',
-                        attachedWidget: Text(world.status, style: TextStyle(fontSize: 14, color: world.statusColor())),
+                        attachedWidget: Text(world.status, style: TextStyle(fontSize: 14, color: world.statusColor())), onTap: () {  },
                       ),
                       WorldDetailCell(
                         iconName: 'img/detail_chapter.png',
-                        title: '元素',
-                        subtitle: world.chapterCount != null ? '共${world.chapterCount}章' : '',
+                        title: '元素列表',
+                        subtitle: world.chapterCount != null ? '共${world.chapterCount}章' : '', onTap: () {
+                          AppNavigator.pushElementList(context, world.id,world.name);
+                      },
+                      ),
+                      WorldDetailCell(
+                        iconName: 'img/detail_chapter.png',
+                        title: '故事列表',
+                        subtitle: world.chapterCount != null ? '共${world.chapterCount}章' : '', onTap: () {
+                        AppNavigator.pushStoryList(context, world.id,world.name);
+                      },
                       ),
                       buildTags(),
                       SizedBox(height: 10),
@@ -246,6 +254,59 @@ class WorldDetailPageState extends State<WorldDetailPage> with RouteAware {
               ],
             ),
             buildNavigationBar(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+class WorldDetailCell extends StatelessWidget {
+  final String iconName;
+  final String title;
+  final String subtitle;
+  final Widget? attachedWidget;
+  final VoidCallback onTap;  // 点击事件的回调函数
+
+  WorldDetailCell({
+    required this.iconName,
+    required this.title,
+    required this.subtitle,
+    this.attachedWidget,
+    required this.onTap,  // 在构造函数中初始化
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(  // 使用 InkWell 来获得点击效果
+      onTap: onTap,  // 将回调函数赋值给 onTap 属性
+      child: Container(
+        color: Colors.white,
+        padding: EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 50,
+              child: Row(
+                children: <Widget>[
+                  Image.asset(iconName),
+                  SizedBox(width: 5),
+                  Text(title, style: TextStyle(fontSize: 16)),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      subtitle,
+                      style: TextStyle(fontSize: 14, color: SQColor.gray),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  attachedWidget != null ? attachedWidget! : Container(),
+                  SizedBox(width: 10),
+                  Image.asset('img/arrow_right.png'),
+                ],
+              ),
+            ),
+            Divider(height: 1),
           ],
         ),
       ),

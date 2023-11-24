@@ -8,6 +8,7 @@ import 'chapter.dart';
 
 class Novel {
   late String id;
+  late int wid;
   late String name;
   late String imgUrl;
   late String firstChapter;
@@ -46,7 +47,7 @@ class Novel {
     chapterCount = int.parse(data['chapterNum'] ?? '0');
     recommendCount = int.parse(data['recommend_num'] ?? '0');
     commentCount = int.parse(data['comment_count'] ?? '0');
-
+    wid=1;
     status = data['stat_name'] ?? '';
     wordCount = data['wordCount'] ?? 0;
     tags = (data['tag'] ?? []).cast<String>()?.toList();

@@ -12,7 +12,7 @@ class WorldCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        AppNavigator.pushWorldDetail(context, world);
+        AppNavigator.pushWorldDetail(context, world.id);
       },
       child: Container(
         padding: EdgeInsets.all(15),

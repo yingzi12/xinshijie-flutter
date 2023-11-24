@@ -7,7 +7,7 @@ import 'package:xinshijie_flutter/utils/constant.dart';
 import 'chapter.dart';
 
 class World {
-  late String id;
+  late int id;
   late String name;
   late String imgUrl;
   late String firstChapter;
@@ -67,7 +67,7 @@ class World {
   }
 
   World.fromStroy(StoryRemVo remVo){
-    id=remVo.sid! as String;
+    id=remVo.sid!.toInt();
     imgUrl=remVo.imgUrl?? "image/empty.jpg";
     author=remVo.createName??"未知";
     name=remVo.sname!;
@@ -90,7 +90,7 @@ class World {
   }
 
   World.fromWorld(WorldRemVo remVo){
-    id=remVo.wid!.toString();
+    id=remVo.wid!.toInt();
     imgUrl=remVo.imgUrl?? "img/empty.png";
     author=remVo.createName??"未知";
     name=remVo.wname!;
@@ -115,7 +115,7 @@ class World {
   }
 
   World.fromWorldEntity(WorldEntity remVo){
-    id=remVo.id!.toString();
+    id=remVo.id!.toInt();
     imgUrl=remVo.imgUrl?? "img/empty.png";
     author=remVo.createName??"未知";
     name=remVo.name!;
