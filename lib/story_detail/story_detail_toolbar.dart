@@ -27,7 +27,29 @@ class StoryDetailToolbar extends StatelessWidget {
         Expanded(
           child: GestureDetector(
             onTap: () {
-              AppNavigator.pushReader(context, story.firstArticleId);
+              if (story.firstArticleId == null||story.firstArticleId == -1) {
+                // 显示一个提示框
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("提示"),
+                      content: Text("暂无章节内容。"),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text("关闭"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else {
+                AppNavigator.pushReaderChapter(context, story.firstArticleId, story.id, story.wid);
+              }
+              // AppNavigator.pushReaderChapter(context, story.firstArticleId,story.id,story.wid);
             },
             child: Container(
               height: 40,

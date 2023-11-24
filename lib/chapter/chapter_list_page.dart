@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:xinshijie_flutter/api/chapter_api.dart';
 import 'package:xinshijie_flutter/app/app_navigator.dart';
-import 'package:xinshijie_flutter/model/chapter_entity.dart';
 import 'package:xinshijie_flutter/model/chapter_single_entity.dart';
 
 class ChapterListPage extends StatefulWidget {
@@ -36,10 +35,10 @@ class _ChapterListPageState extends State<ChapterListPage> {
     // 你的加载逻辑，可能需要根据搜索查询和下拉选项来过滤数据
     // 例如：
     List<ChapterSingleEntity> elist = await ChapterApi.getList({
-      "pageNum": currentPage.toString(),
+      "page": currentPage.toString(),
       // "wid": widget.wId.toString(),
-      "wid":"1",
-      "sid":"1",
+      "wid":this.widget.wid.toString(),
+      "sid":this.widget.sid.toString(),
       "orderBy": dropdownValue3
     });
 
@@ -81,7 +80,14 @@ class _ChapterListPageState extends State<ChapterListPage> {
     late int wid=1;
     if (isLoading) return;
     setState(() => isLoading = true);
-    List<ChapterSingleEntity>  elist= await ChapterApi.getList({"pageNum" : currentPage.toString(),"wid":wid.toString()});
+    List<ChapterSingleEntity> elist = await ChapterApi.getList({
+      "page": currentPage.toString(),
+      // "wid": widget.wId.toString(),
+      "wid":this.widget.wid.toString(),
+      "sid":this.widget.sid.toString(),
+      "orderBy": dropdownValue3
+    });
+    // List<ChapterSingleEntity>  elist= await ChapterApi.getList({"pageNum" : currentPage.toString(),"wid":wid.toString()});
     // 使用 Future.microtask 延迟调用 setState
     Future.microtask(() {
       if (mounted) {
@@ -102,7 +108,7 @@ class _ChapterListPageState extends State<ChapterListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('元素列表'),
+        title: Text('章节列表'),
         actions: [
           IconButton(
             icon: Icon(Icons.filter_list),
@@ -124,7 +130,7 @@ class _ChapterListPageState extends State<ChapterListPage> {
                   title: Text(stories[index].title??"未知"),
                   dense: true,
                   onTap: () {
-                    AppNavigator.pushReader(context, 1000);
+                    AppNavigator.pushReaderChapter(context, stories[index].id!.toInt() ,this.widget.sid,this.widget.wid);
                   },
                 );
               },

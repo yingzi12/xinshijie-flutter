@@ -13,6 +13,7 @@ import 'package:xinshijie_flutter/me/web_page.dart';
 import 'package:xinshijie_flutter/ranking/ranking_list_page.dart';
 import 'package:xinshijie_flutter/ranking_story/story_all_list_page.dart';
 import 'package:xinshijie_flutter/ranking_story/story_list_page.dart';
+import 'package:xinshijie_flutter/reader/reader_chapter_page.dart';
 import 'package:xinshijie_flutter/reader/reader_page.dart';
 import 'package:xinshijie_flutter/story_detail/story_detail_page.dart';
 import 'package:xinshijie_flutter/world_detail/world_detail_page.dart';
@@ -82,6 +83,12 @@ class AppNavigator {
   static pushReader(BuildContext context, int articleId) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return ReaderPage(articleId: articleId);
+    }));
+  }
+
+  static pushReaderChapter(BuildContext context, int chapterId, int sid, int wid) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ReaderChapterPage(chapterId: chapterId,sid:sid,wid:wid);
     }));
   }
 }

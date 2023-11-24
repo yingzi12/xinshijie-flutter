@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:xinshijie_flutter/model/chapter_entity.dart';
 import 'package:xinshijie_flutter/model/chapter_single_entity.dart';
 import 'package:xinshijie_flutter/model/world_model.dart';
 import 'package:xinshijie_flutter/utils/HttpUtil.dart';
@@ -7,7 +8,7 @@ import 'package:xinshijie_flutter/utils/HttpUtil.dart';
 class ChapterApi {
 
   // 类变量（静态变量）
-  static String info ="/wiki/chapter/info";
+  static String info ="/wiki/chapter/getInfo";
 
   static String list ="/wiki/chapter/list";
 
@@ -19,12 +20,12 @@ class ChapterApi {
 
   static String edit ="/wiki/chapter/edit";
 
-  static Future<Map<String, dynamic>> addWorld(Map<String, String> body) async {
+  static Future<Map<String, dynamic>> addChapter(Map<String, String> body) async {
     final response = await HttpUtil.post(add, body);
     return HttpUtil.processResponse(response);
   }
 
-  static Future<Map<String, dynamic>> editWorld(Map<String, String> body) async {
+  static Future<Map<String, dynamic>> editChapter(Map<String, String> body) async {
     final response = await HttpUtil.post(edit, body);
     return HttpUtil.processResponse(response);
   }
@@ -45,14 +46,14 @@ class ChapterApi {
     }
   }
 
-  static Future<ChapterSingleEntity> getInfo(int id) async {
-    final response = await HttpUtil.get("$info?id=$id");
+  static Future<ChapterEntity> getInfo(int scid,int sid,int wid) async {
+    final response = await HttpUtil.get("$info?sid=$sid&scid=$scid&wid=$wid");
 
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonMap = json.decode(response.body);
       if (jsonMap['code'] == 200) {
         Map<String, dynamic> jsonData = jsonMap['data'];
-        return ChapterSingleEntity.fromJson(jsonData);
+        return ChapterEntity.fromJson(jsonData);
       } else {
         throw Exception('Failed to load info: ${jsonMap['message']}');
       }
@@ -61,7 +62,7 @@ class ChapterApi {
     }
   }
 
-  static Future<Map<String, dynamic>> deleteWorld(int id) async {
+  static Future<Map<String, dynamic>> deleteChapter(int id) async {
     final response = await HttpUtil.get("$del?id=$id");
     return HttpUtil.processResponse(response);
   }

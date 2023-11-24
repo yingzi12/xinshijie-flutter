@@ -1,36 +1,37 @@
-/// id : 0
-/// name : ""
-/// intro : ""
+/// id : 17953
+/// name : "我有一舰载星河"
+/// intro : "我有一舰载星河最新章节由网友提供，《我有一舰载星河》情节跌宕起伏、扣人心弦，是一本情节与文笔俱佳的，蚂蚁文学免费提供我有一舰载星河最新清爽干净的文字章节在线阅读。"
+/// description : null
 /// permission : 0
-/// author : ""
+/// author : "腰悬旧壶"
 /// category : 0
-/// status : 0
-/// createTime : ""
-/// createId : 0
-/// createName : ""
-/// updateName : ""
-/// updateTime : ""
-/// updateId : 0
-/// tags : ""
-/// updateChapter : ""
-/// updateChapterId : 0
-/// updateChapterTime : ""
+/// status : 3
+/// createTime : "2023-11-15 12:16:56"
+/// createId : 1
+/// createName : "admin"
+/// updateName : null
+/// updateTime : "2023-11-15 12:16:56"
+/// updateId : null
+/// tags : null
+/// updateChapter : "第九十三章 嫁祸！"
+/// updateChapterId : -1
+/// updateChapterTime : "2023-11-15 12:18:56"
 /// diffuse : 0
 /// ranks : 0
 /// types : 0
 /// typeName : ""
 /// auditNumber : 0
-/// auditContent : ""
+/// auditContent : null
 /// countWord : 0
-/// imgUrl : ""
-/// isVip : 0
-/// wid : 0
-/// wname : ""
-/// auditId : 0
-/// auditName : ""
-/// auditTime : ""
-/// endTime : ""
-/// source : ""
+/// imgUrl : "/profile/upload/221/23efc32a25be83e0c06f94d524167da6.jpg"
+/// isVip : null
+/// wid : 18381
+/// wname : "我有一舰载星河"
+/// auditId : null
+/// auditName : null
+/// auditTime : null
+/// endTime : null
+/// source : "https://www.mayiwxw.com/106_106828/index.html"
 /// countAuthor : 0
 /// countComment : 0
 /// countDiscuss : 0
@@ -39,15 +40,16 @@
 /// countHarding : 0
 /// countLike : 0
 /// countSee : 0
-/// countAudit : 0
-/// isPrivate : 0
+/// countAudit : null
+/// isPrivate : 2
 /// countAuditDiscuss : 0
-/// countAuditCommit : 0
+/// countAuditCommit : null
 /// countAuditChapter : 0
 /// countAuditAuthor : 0
-/// authorType : 0
-/// scores : 0
-/// descriptionZip : ""
+/// authorType : null
+/// scores : null
+/// descriptionZip : "我有一舰载星河最新章节由网友提供，《我有一舰载星河》情节跌宕起伏、扣人心弦，是一本情节与文笔俱佳的，蚂蚁文学免费提供我有一舰载星河最新清爽干净的文字章节在线阅读。"
+/// firstId : 1699457524082
 /// kind : 0
 
 class StoryEntity {
@@ -55,6 +57,7 @@ class StoryEntity {
       num? id, 
       String? name, 
       String? intro, 
+      dynamic description, 
       num? permission, 
       String? author, 
       num? category, 
@@ -62,10 +65,10 @@ class StoryEntity {
       String? createTime, 
       num? createId, 
       String? createName, 
-      String? updateName, 
+      dynamic updateName, 
       String? updateTime, 
-      num? updateId, 
-      String? tags, 
+      dynamic updateId, 
+      dynamic tags, 
       String? updateChapter, 
       num? updateChapterId, 
       String? updateChapterTime, 
@@ -74,16 +77,16 @@ class StoryEntity {
       num? types, 
       String? typeName, 
       num? auditNumber, 
-      String? auditContent, 
+      dynamic auditContent, 
       num? countWord, 
       String? imgUrl, 
-      num? isVip, 
+      dynamic isVip, 
       num? wid, 
       String? wname, 
-      num? auditId, 
-      String? auditName, 
-      String? auditTime, 
-      String? endTime, 
+      dynamic auditId, 
+      dynamic auditName, 
+      dynamic auditTime, 
+      dynamic endTime, 
       String? source, 
       num? countAuthor, 
       num? countComment, 
@@ -93,19 +96,21 @@ class StoryEntity {
       num? countHarding, 
       num? countLike, 
       num? countSee, 
-      num? countAudit, 
+      dynamic countAudit, 
       num? isPrivate, 
       num? countAuditDiscuss, 
-      num? countAuditCommit, 
+      dynamic countAuditCommit, 
       num? countAuditChapter, 
       num? countAuditAuthor, 
-      num? authorType, 
-      num? scores, 
+      dynamic authorType, 
+      dynamic scores, 
       String? descriptionZip, 
+      num? firstId, 
       num? kind,}){
     _id = id;
     _name = name;
     _intro = intro;
+    _description = description;
     _permission = permission;
     _author = author;
     _category = category;
@@ -153,6 +158,7 @@ class StoryEntity {
     _authorType = authorType;
     _scores = scores;
     _descriptionZip = descriptionZip;
+    _firstId = firstId;
     _kind = kind;
 }
 
@@ -160,6 +166,7 @@ class StoryEntity {
     _id = json['id'];
     _name = json['name'];
     _intro = json['intro'];
+    _description = json['description'];
     _permission = json['permission'];
     _author = json['author'];
     _category = json['category'];
@@ -207,11 +214,13 @@ class StoryEntity {
     _authorType = json['authorType'];
     _scores = json['scores'];
     _descriptionZip = json['descriptionZip'];
+    _firstId = json['firstId'];
     _kind = json['kind'];
   }
   num? _id;
   String? _name;
   String? _intro;
+  dynamic _description;
   num? _permission;
   String? _author;
   num? _category;
@@ -219,10 +228,10 @@ class StoryEntity {
   String? _createTime;
   num? _createId;
   String? _createName;
-  String? _updateName;
+  dynamic _updateName;
   String? _updateTime;
-  num? _updateId;
-  String? _tags;
+  dynamic _updateId;
+  dynamic _tags;
   String? _updateChapter;
   num? _updateChapterId;
   String? _updateChapterTime;
@@ -231,16 +240,16 @@ class StoryEntity {
   num? _types;
   String? _typeName;
   num? _auditNumber;
-  String? _auditContent;
+  dynamic _auditContent;
   num? _countWord;
   String? _imgUrl;
-  num? _isVip;
+  dynamic _isVip;
   num? _wid;
   String? _wname;
-  num? _auditId;
-  String? _auditName;
-  String? _auditTime;
-  String? _endTime;
+  dynamic _auditId;
+  dynamic _auditName;
+  dynamic _auditTime;
+  dynamic _endTime;
   String? _source;
   num? _countAuthor;
   num? _countComment;
@@ -250,19 +259,21 @@ class StoryEntity {
   num? _countHarding;
   num? _countLike;
   num? _countSee;
-  num? _countAudit;
+  dynamic _countAudit;
   num? _isPrivate;
   num? _countAuditDiscuss;
-  num? _countAuditCommit;
+  dynamic _countAuditCommit;
   num? _countAuditChapter;
   num? _countAuditAuthor;
-  num? _authorType;
-  num? _scores;
+  dynamic _authorType;
+  dynamic _scores;
   String? _descriptionZip;
+  num? _firstId;
   num? _kind;
 StoryEntity copyWith({  num? id,
   String? name,
   String? intro,
+  dynamic description,
   num? permission,
   String? author,
   num? category,
@@ -270,10 +281,10 @@ StoryEntity copyWith({  num? id,
   String? createTime,
   num? createId,
   String? createName,
-  String? updateName,
+  dynamic updateName,
   String? updateTime,
-  num? updateId,
-  String? tags,
+  dynamic updateId,
+  dynamic tags,
   String? updateChapter,
   num? updateChapterId,
   String? updateChapterTime,
@@ -282,16 +293,16 @@ StoryEntity copyWith({  num? id,
   num? types,
   String? typeName,
   num? auditNumber,
-  String? auditContent,
+  dynamic auditContent,
   num? countWord,
   String? imgUrl,
-  num? isVip,
+  dynamic isVip,
   num? wid,
   String? wname,
-  num? auditId,
-  String? auditName,
-  String? auditTime,
-  String? endTime,
+  dynamic auditId,
+  dynamic auditName,
+  dynamic auditTime,
+  dynamic endTime,
   String? source,
   num? countAuthor,
   num? countComment,
@@ -301,19 +312,21 @@ StoryEntity copyWith({  num? id,
   num? countHarding,
   num? countLike,
   num? countSee,
-  num? countAudit,
+  dynamic countAudit,
   num? isPrivate,
   num? countAuditDiscuss,
-  num? countAuditCommit,
+  dynamic countAuditCommit,
   num? countAuditChapter,
   num? countAuditAuthor,
-  num? authorType,
-  num? scores,
+  dynamic authorType,
+  dynamic scores,
   String? descriptionZip,
+  num? firstId,
   num? kind,
 }) => StoryEntity(  id: id ?? _id,
   name: name ?? _name,
   intro: intro ?? _intro,
+  description: description ?? _description,
   permission: permission ?? _permission,
   author: author ?? _author,
   category: category ?? _category,
@@ -361,11 +374,13 @@ StoryEntity copyWith({  num? id,
   authorType: authorType ?? _authorType,
   scores: scores ?? _scores,
   descriptionZip: descriptionZip ?? _descriptionZip,
+  firstId: firstId ?? _firstId,
   kind: kind ?? _kind,
 );
   num? get id => _id;
   String? get name => _name;
   String? get intro => _intro;
+  dynamic get description => _description;
   num? get permission => _permission;
   String? get author => _author;
   num? get category => _category;
@@ -373,10 +388,10 @@ StoryEntity copyWith({  num? id,
   String? get createTime => _createTime;
   num? get createId => _createId;
   String? get createName => _createName;
-  String? get updateName => _updateName;
+  dynamic get updateName => _updateName;
   String? get updateTime => _updateTime;
-  num? get updateId => _updateId;
-  String? get tags => _tags;
+  dynamic get updateId => _updateId;
+  dynamic get tags => _tags;
   String? get updateChapter => _updateChapter;
   num? get updateChapterId => _updateChapterId;
   String? get updateChapterTime => _updateChapterTime;
@@ -385,16 +400,16 @@ StoryEntity copyWith({  num? id,
   num? get types => _types;
   String? get typeName => _typeName;
   num? get auditNumber => _auditNumber;
-  String? get auditContent => _auditContent;
+  dynamic get auditContent => _auditContent;
   num? get countWord => _countWord;
   String? get imgUrl => _imgUrl;
-  num? get isVip => _isVip;
+  dynamic get isVip => _isVip;
   num? get wid => _wid;
   String? get wname => _wname;
-  num? get auditId => _auditId;
-  String? get auditName => _auditName;
-  String? get auditTime => _auditTime;
-  String? get endTime => _endTime;
+  dynamic get auditId => _auditId;
+  dynamic get auditName => _auditName;
+  dynamic get auditTime => _auditTime;
+  dynamic get endTime => _endTime;
   String? get source => _source;
   num? get countAuthor => _countAuthor;
   num? get countComment => _countComment;
@@ -404,15 +419,16 @@ StoryEntity copyWith({  num? id,
   num? get countHarding => _countHarding;
   num? get countLike => _countLike;
   num? get countSee => _countSee;
-  num? get countAudit => _countAudit;
+  dynamic get countAudit => _countAudit;
   num? get isPrivate => _isPrivate;
   num? get countAuditDiscuss => _countAuditDiscuss;
-  num? get countAuditCommit => _countAuditCommit;
+  dynamic get countAuditCommit => _countAuditCommit;
   num? get countAuditChapter => _countAuditChapter;
   num? get countAuditAuthor => _countAuditAuthor;
-  num? get authorType => _authorType;
-  num? get scores => _scores;
+  dynamic get authorType => _authorType;
+  dynamic get scores => _scores;
   String? get descriptionZip => _descriptionZip;
+  num? get firstId => _firstId;
   num? get kind => _kind;
 
   Map<String, dynamic> toJson() {
@@ -420,6 +436,7 @@ StoryEntity copyWith({  num? id,
     map['id'] = _id;
     map['name'] = _name;
     map['intro'] = _intro;
+    map['description'] = _description;
     map['permission'] = _permission;
     map['author'] = _author;
     map['category'] = _category;
@@ -467,6 +484,7 @@ StoryEntity copyWith({  num? id,
     map['authorType'] = _authorType;
     map['scores'] = _scores;
     map['descriptionZip'] = _descriptionZip;
+    map['firstId'] = _firstId;
     map['kind'] = _kind;
     return map;
   }

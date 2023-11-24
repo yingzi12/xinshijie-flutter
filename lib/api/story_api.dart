@@ -7,7 +7,7 @@ import 'package:xinshijie_flutter/utils/HttpUtil.dart';
 class StoryApi {
 
   // 类变量（静态变量）
-  static String info ="/wiki/story/info";
+  static String info ="/wiki/story/getInfo";
 
   static String list ="/wiki/story/list";
 
@@ -65,7 +65,7 @@ class StoryApi {
   }
 
   static Future<StoryEntity> getInfo(int id) async {
-    final response = await HttpUtil.get("$info?id=$id");
+    final response = await HttpUtil.get("$info/$id");
 
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonMap = json.decode(response.body);

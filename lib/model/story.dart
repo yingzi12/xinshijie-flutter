@@ -31,31 +31,6 @@ class Story {
   late List<String> tags;
   late bool isLimitedFree;
 
-  Story.fromJson(Map data) {
-    id = data['bid'] ?? '';
-    firstArticleId = data['first_article_id'] ?? 0;
-    name = data['bookname'];
-    imgUrl = data['book_cover'];
-    firstChapter = data['topic_first'] ?? '';
-    if (data['lastChapter'] != null) {
-      lastChapter = Chapter.fromJson(data['lastChapter']);
-    }
-    score = data['score'] ?? 0;
-    author = data['author_name'];
-    price = double.parse(data['price'] ?? '0');
-    type = data['class_name'] ?? '';
-    introduction = data['introduction'] ?? '';
-    chapterCount = int.parse(data['chapterNum'] ?? '0');
-    recommendCount = int.parse(data['recommend_num'] ?? '0');
-    commentCount = int.parse(data['comment_count'] ?? '0');
-
-    status = data['stat_name'] ?? '';
-    wordCount = data['wordCount'] ?? 0;
-    tags = (data['tag'] ?? []).cast<String>()?.toList();
-
-    isLimitedFree = data['is_free'] == 1;
-  }
-
   String recommendCountStr() {
     if (recommendCount >= 10000) {
       return (recommendCount / 10000).toStringAsFixed(1) + '万人推荐';
@@ -69,7 +44,7 @@ class Story {
   }
 
   Story.fromStory(StoryRemVo remVo){
-    id=remVo.wid!.toInt();
+    id=remVo.sid!.toInt();
     wid=remVo.wid!.toInt();
     wname=remVo.wname!;
     imgUrl=remVo.imgUrl?? "img/empty.png";
@@ -144,5 +119,10 @@ class Story {
     wordCount =0;
     score=0;
     updateTime=remVo.updateChapterTime?? (remVo.createTime??"");
+    if(remVo.firstId!=null){
+      firstArticleId=remVo.firstId!.toInt();
+    }else{
+      firstArticleId = -1;
+    }
   }
 }

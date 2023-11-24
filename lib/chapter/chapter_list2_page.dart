@@ -2,18 +2,21 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:xinshijie_flutter/api/story_api.dart';
-import 'package:xinshijie_flutter/model/story_entity.dart';
-import 'package:xinshijie_flutter/ranking_story/story_cell.dart';
+import 'package:xinshijie_flutter/api/chapter_api.dart';
+import 'package:xinshijie_flutter/app/app_navigator.dart';
+import 'package:xinshijie_flutter/model/chapter_single_entity.dart';
 
-class StoryAllListPage extends StatefulWidget {
-  StoryAllListPage();
+class ChapterListPage extends StatefulWidget {
+  final int wid;
+  final int sid;
+
+  ChapterListPage( { required this.wid, required this.sid});
   @override
-  _StoryAllListPageState createState() => _StoryAllListPageState();
+  _ChapterListPageState createState() => _ChapterListPageState();
 }
 
-class _StoryAllListPageState extends State<StoryAllListPage> {
-  List<StoryEntity> stories = [];
+class _ChapterListPageState extends State<ChapterListPage> {
+  List<ChapterSingleEntity> stories = [];
   int currentPage = 1;
   bool isLoading = false;
   ScrollController _scrollController = ScrollController();
@@ -31,19 +34,31 @@ class _StoryAllListPageState extends State<StoryAllListPage> {
 
     // 你的加载逻辑，可能需要根据搜索查询和下拉选项来过滤数据
     // 例如：
-    List<StoryEntity> elist = await StoryApi.getList({
+    List<ChapterSingleEntity> reellist = await ChapterApi.getList({
       "pageNum": currentPage.toString(),
-      "title": searchQuery,
-      "filter1": dropdownValue1,
-      "filter2": dropdownValue2,
-      "filter3": dropdownValue3
+      // "wid": widget.wId.toString(),
+      "wid":"1",
+      "sid":"1",
+      "pid":"0",
+      "orderBy": dropdownValue3
     });
+    //
+    // for(ChapterSingleEntity chapterSingleEntity:reellist){
+    //   List<ChapterSingleEntity> chapterlist = await ChapterApi.getList({
+    //     "pageNum": currentPage.toString(),
+    //     // "wid": widget.wId.toString(),
+    //     "wid":"1",
+    //     "sid":"1",
+    //     "pid":chapterSingleEntity.id.toString(),
+    //     "orderBy": dropdownValue3
+    //   });
+    // }
 
     Future.microtask(() {
       if (mounted) {
         setState(() {
-          if (elist != null && elist.isNotEmpty) {
-            stories.addAll(elist);
+          if (reellist != null && reellist.isNotEmpty) {
+            stories.addAll(reellist);
             currentPage++;
           }
           isLoading = false;
@@ -77,7 +92,7 @@ class _StoryAllListPageState extends State<StoryAllListPage> {
     late int wid=1;
     if (isLoading) return;
     setState(() => isLoading = true);
-    List<StoryEntity>  elist= await StoryApi.getList({"pageNum" : currentPage.toString(),"wid":wid.toString()});
+    List<ChapterSingleEntity>  elist= await ChapterApi.getList({"pageNum" : currentPage.toString(),"wid":wid.toString()});
     // 使用 Future.microtask 延迟调用 setState
     Future.microtask(() {
       if (mounted) {
@@ -98,7 +113,7 @@ class _StoryAllListPageState extends State<StoryAllListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('所有故事'),
+        title: Text('章节列表'),
         actions: [
           IconButton(
             icon: Icon(Icons.filter_list),
@@ -110,35 +125,23 @@ class _StoryAllListPageState extends State<StoryAllListPage> {
       ),
       body: Column(
         children: [
-          buildSearchBox(),
           buildFilterBox(),
           Expanded(
             child: ListView.builder(
               controller: _scrollController,
               itemCount: stories.length,
               itemBuilder: (context, index) {
-                return StoryCell(stories[index]);
+                return ListTile(
+                  title: Text(stories[index].title??"未知"),
+                  dense: true,
+                  onTap: () {
+                    AppNavigator.pushReader(context, 1000);
+                  },
+                );
               },
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget buildSearchBox() {
-    return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: TextField(
-        decoration: InputDecoration(
-          labelText: '搜索',
-          border: OutlineInputBorder(),
-          suffixIcon: Icon(Icons.search),
-        ),
-        onSubmitted: (value) {
-          // 搜索逻辑
-          reloadData(searchQuery: value);
-        },
       ),
     );
   }

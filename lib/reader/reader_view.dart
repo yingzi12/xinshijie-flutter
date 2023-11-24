@@ -26,7 +26,17 @@ class ReaderView extends StatelessWidget {
   }
 
   buildContent(Article article, int page) {
+    // 确保页面索引在有效范围内
+    if (page < 0 || page >= article.pageCount) {
+      return Container(); // 返回一个空容器或者一些错误信息
+    }
+
     var content = article.stringAtPageIndex(page);
+
+    if (content.startsWith('\n')) {
+      content = content.substring(1);
+    }
+    // var content = article.stringAtPageIndex(page);
 
     if (content.startsWith('\n')) {
       content = content.substring(1);

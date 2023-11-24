@@ -38,7 +38,7 @@ class HomeStoryModule {
       style = data['m_s_style'];
       books = [];
       content.forEach((data) {
-        books!.add(Story.fromJson(data));
+        books!.add(Story.fromStory(data));
       });
     }
   }

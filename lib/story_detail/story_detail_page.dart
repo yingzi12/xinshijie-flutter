@@ -79,11 +79,12 @@ class StoryDetailPageState extends State<StoryDetailPage> with RouteAware {
 
   //获取世界详细
   fetchData() async {
-    var wId = this.widget.wid;
-    StoryEntity storyEntity= await StoryApi.getInfo(wId);
+    var wid = this.widget.wid;
+    var sid = this.widget.sid;
+    StoryEntity storyEntity= await StoryApi.getInfo(sid);
     // var storyResponse = await Request.post(action: 'story_detail', params: {'id': storyId});
     //停止
-    List<CommentEntity>  commentList= await CommentApi.getList({'wid': wId.toString(),'source':1.toString()});
+    List<CommentEntity>  commentList= await CommentApi.getList({'wid': wid.toString(),'sid': sid.toString(),'source':2.toString()});
     // var commentsResponse = await Request.post(action: 'story_comment', params: {'id': storyId});
     List<StoryComment> comments = [];
     commentList.forEach((data) {
@@ -227,20 +228,19 @@ class StoryDetailPageState extends State<StoryDetailPage> with RouteAware {
                         iconName: 'img/detail_latest.png',
                         title: '最新',
                         subtitle: story.lastChapter?.title ?? '',
-                        attachedWidget: Text(story.status, style: TextStyle(fontSize: 14, color: story.statusColor())), onTap: () {  },
-                      ),
-                      StoryDetailCell(
-                        iconName: 'img/detail_chapter.png',
-                        title: '元素列表',
-                        subtitle: story.chapterCount != null ? '共${story.chapterCount}章' : '', onTap: () {
-                          AppNavigator.pushElementList(context, story.id,story.name);
+                        attachedWidget: Text(story.status, style: TextStyle(fontSize: 14, color: story.statusColor())), onTap: () {
+                          if(story.lastChapter!=null && story.lastChapter!.id != null && story.lastChapter!.id != -1){
+                            AppNavigator.pushReaderChapter(context,story.lastChapter.id, story.wid,story.id);
+                          }else{
+                            //弹出提示
+                          }
                       },
                       ),
                       StoryDetailCell(
                         iconName: 'img/detail_chapter.png',
-                        title: '故事列表',
+                        title: '章节列表',
                         subtitle: story.chapterCount != null ? '共${story.chapterCount}章' : '', onTap: () {
-                        AppNavigator.pushStoryList(context, story.id,story.name);
+                        AppNavigator.pushChapterList(context, story.wid,story.id);
                       },
                       ),
                       buildTags(),

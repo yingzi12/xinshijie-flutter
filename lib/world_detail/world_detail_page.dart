@@ -230,7 +230,7 @@ class WorldDetailPageState extends State<WorldDetailPage> with RouteAware {
                       ),
                       WorldDetailCell(
                         iconName: 'img/detail_chapter.png',
-                        title: '元素列表',
+                        title: '世界列表',
                         subtitle: world.chapterCount != null ? '共${world.chapterCount}章' : '', onTap: () {
                           AppNavigator.pushElementList(context, world.id,world.name);
                       },

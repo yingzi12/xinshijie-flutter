@@ -53,6 +53,8 @@ class StoryDetailHeader extends StatelessWidget {
               children: <Widget>[
                 Text(story.name, style: TextStyle(fontSize: Utility.fixedFontSize(18), color: Colors.white, fontWeight: FontWeight.bold)),
                 SizedBox(height: 10),
+                Text('世界 : ${story.wname??""}', style: TextStyle(fontSize: Utility.fixedFontSize(14), color: SQColor.orange)),
+                SizedBox(height: 10),
                 Text(story.author, style: TextStyle(fontSize: Utility.fixedFontSize(14), color: SQColor.white)),
                 SizedBox(height: 10),
                 Text('更新时间 : ${story.updateTime??""}', style: TextStyle(fontSize: Utility.fixedFontSize(10), color: SQColor.white)),

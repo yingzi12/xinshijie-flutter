@@ -97,7 +97,7 @@ class _RankingListPageState extends State<RankingListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('元素列表'),
+        title: Text('世界排行榜'),
         actions: [
           IconButton(
             icon: Icon(Icons.filter_list),

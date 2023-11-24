@@ -30,7 +30,8 @@ class ChapterEntity {
       Next? next, 
       String? contentZip, 
       num? length, 
-      String? source,}){
+      String? source,
+  }){
     _id = id;
     _title = title;
     _status = status;
@@ -146,6 +147,7 @@ ChapterEntity copyWith({  num? id,
       map['next'] = _next?.toJson();
     }
     map['contentZip'] = _contentZip;
+
     map['length'] = _length;
     map['source'] = _source;
     return map;
