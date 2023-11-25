@@ -246,6 +246,8 @@ class ReaderPageState extends State<ReaderPage> with RouteAware {
     }
     return ReaderMenu(
       chapters: chapters,
+      wid: 1,
+      sid: 1,
       articleIndex: currentArticle!.index,
       onTap: hideMenu,
       onPreviousArticle: () {

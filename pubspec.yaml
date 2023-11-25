@@ -58,6 +58,11 @@ dependencies:
   bruno: ^3.4.3
   flutter_widget_from_html: ^0.14.7
   expandable: ^5.0.1
+  #底部弹出框，实现底部评论功能
+  in_app_review: ^2.0.8
+  #中间的弹出框，可以实现登录或者是警告，
+  rflutter_alert: ^2.0.7
+  snapping_page_scroll: ^3.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

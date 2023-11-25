@@ -84,6 +84,7 @@ class _ReaderMenuState extends State<ReaderMenu> with SingleTickerProviderStateM
       left: 0,
       right: 0,
       child: Container(
+        // color: Colors.black.withOpacity(0.5), // 半透明背景
         decoration: BoxDecoration(color: SQColor.paper, boxShadow: Styles.borderShadow),
         height: Screen.navigationBarHeight,
         padding: EdgeInsets.fromLTRB(5, Screen.topSafeHeight, 5, 0),
