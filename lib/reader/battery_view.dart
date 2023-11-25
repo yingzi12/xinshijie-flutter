@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:battery/battery.dart';
 import 'dart:io';
 
-import 'package:xinshijie_flutter/public.dart';
+import 'package:xinshijie_flutter/public.dart'; // Ensure this import is necessary
 
 class BatteryView extends StatefulWidget {
   @override
@@ -16,30 +16,29 @@ class _BatteryViewState extends State<BatteryView> {
   @override
   void initState() {
     super.initState();
-
     getBatteryLevel();
   }
 
-  getBatteryLevel() async {
+  Future<void> getBatteryLevel() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (Platform.isAndroid) {
       var androidInfo = await deviceInfo.androidInfo;
-      if (!androidInfo.isPhysicalDevice) {
-        return;
-      }
-    }
-    if (Platform.isIOS) {
+      if (!androidInfo.isPhysicalDevice) return;
+    } else if (Platform.isIOS) {
       var iosInfo = await deviceInfo.iosInfo;
-      if (!iosInfo.isPhysicalDevice) {
-        return;
-      }
+      if (!iosInfo.isPhysicalDevice) return;
     }
 
-    var level = await Battery().batteryLevel;
-    if (mounted) {
-      setState(() {
-        this.batteryLevel = level / 100.0;
-      });
+    try {
+      var level = await Battery().batteryLevel;
+      if (mounted) {
+        setState(() {
+          batteryLevel = level / 100.0;
+        });
+      }
+    } catch (e) {
+      // Handle any errors here
+      print('Failed to get battery level: $e');
     }
   }
 
@@ -54,10 +53,16 @@ class _BatteryViewState extends State<BatteryView> {
           Container(
             margin: EdgeInsets.fromLTRB(2, 2, 2, 2),
             width: 20 * batteryLevel,
-            color: SQColor.golden,
-          )
+            color: SQColor.golden, // Ensure this color is defined in your public.dart
+          ),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // Dispose any controllers or other resources here
+    super.dispose();
   }
 }

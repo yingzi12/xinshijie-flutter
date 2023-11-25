@@ -44,13 +44,13 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
 
   List<Chapter> chapters = [];
 
-  @override
-  void initState() {
-    super.initState();
-    pageController.addListener(onScroll);
-
-    setup();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   pageController.addListener(onScroll);
+  //
+  //   setup();
+  // }
 
   @override
   void didChangeDependencies() {
@@ -70,22 +70,41 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
     super.dispose();
   }
 
+
+  @override
+  void initState() {
+    super.initState();
+    setup();
+  }
+
+  // 优化 setup 方法
   void setup() async {
     await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    // 不延迟的话，安卓获取到的topSafeHeight是错的。
-    await Future.delayed(const Duration(milliseconds: 100), () {});
+    //   // 不延迟的话，安卓获取到的topSafeHeight是错的。
+    await Future.delayed(const Duration(milliseconds: 100));
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
 
     topSafeHeight = Screen.topSafeHeight;
 
-    List<ChapterSingleEntity> chaptersResponse = await ChapterApi.getList({"wid":widget.wid.toString(),"sid":widget.sid.toString()});
-    int index=0;
-    chaptersResponse.forEach((data) {
-      index=index+1;
-      chapters.add(Chapter.fromJsonEntiry(data.id!.toInt() ,data.title??"",index));
-    });
+    try {
+      await loadChapters();
+      await resetContent(widget.chapterId, PageJumpType.stay);
+    } catch (e) {
+      // 处理异常
+      Toast.show('加载章节失败: $e');
+    }
+  }
 
-    await resetContent(this.widget.chapterId, PageJumpType.stay);
+  // 加载章节列表
+  Future<void> loadChapters() async {
+    List<ChapterSingleEntity> chaptersResponse = await ChapterApi.getList({"wid": widget.wid.toString(), "sid": widget.sid.toString()});
+    int index = 0;
+    setState(() {
+      chapters = chaptersResponse.map((data) {
+        index++;
+        return Chapter.fromJsonEntiry(data.id!.toInt(), data.title ?? "", index);
+      }).toList();
+    });
   }
 
   resetContent(int articleId, PageJumpType jumpType) async {
@@ -109,7 +128,7 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
       pageController.jumpToPage((preArticle != null ? preArticle!.pageCount : 0) + pageIndex);
     }
 
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   onScroll() {
@@ -255,6 +274,8 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
     return ReaderMenu(
       chapters: chapters,
       articleIndex: currentArticle!.index,
+      wid: this.widget.wid,
+      sid: this.widget.sid,
       onTap: hideMenu,
       onPreviousArticle: () {
         resetContent(currentArticle!.preArticleId, PageJumpType.firstPage);

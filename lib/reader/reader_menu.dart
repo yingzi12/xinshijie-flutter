@@ -6,16 +6,28 @@ import 'dart:async';
 
 import 'package:xinshijie_flutter/public.dart';
 
+
 class ReaderMenu extends StatefulWidget {
   final List<Chapter> chapters;
   final int articleIndex;
+  final int wid;
+  final int sid;
 
   final VoidCallback onTap;
   final VoidCallback onPreviousArticle;
   final VoidCallback onNextArticle;
   final void Function(Chapter chapter) onToggleChapter;
 
-  ReaderMenu({required this.chapters, required this.articleIndex, required this.onTap, required this.onPreviousArticle, required this.onNextArticle, required this.onToggleChapter});
+  ReaderMenu({
+    required this.chapters,
+    required this.articleIndex,
+    required this.wid,
+    required this.sid,
+    required this.onTap,
+    required this.onPreviousArticle,
+    required this.onNextArticle,
+    required this.onToggleChapter,
+  });
 
   @override
   _ReaderMenuState createState() => _ReaderMenuState();
@@ -27,6 +39,9 @@ class _ReaderMenuState extends State<ReaderMenu> with SingleTickerProviderStateM
 
   late double progressValue;
   bool isTipVisible = false;
+
+  // 创建 GlobalKey 用于控制 Scaffold
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   initState() {
@@ -220,33 +235,65 @@ class _ReaderMenuState extends State<ReaderMenu> with SingleTickerProviderStateM
     );
   }
 
-  buildBottomItem(String title, String icon) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 7),
-      child: Column(
-        children: <Widget>[
-          Image.asset(icon),
-          SizedBox(height: 5),
-          Text(title, style: TextStyle(fontSize: Utility.fixedFontSize(12), color: SQColor.darkGray)),
-        ],
+  // 构建侧边栏
+  Drawer buildDrawer() {
+    return Drawer(
+      child: ListView.builder(
+        itemCount: widget.chapters.length,
+        itemBuilder: (BuildContext context, int index) {
+          Chapter chapter = widget.chapters[index];
+          return ListTile(
+            title: Text(chapter.title),
+            onTap: () {
+              widget.onToggleChapter(chapter);
+              Navigator.of(context).pop(); // 关闭侧边栏
+            },
+          );
+        },
       ),
     );
   }
 
+  // 修改 buildBottomItem 方法以处理目录点击
+  buildBottomItem(String title, String icon) {
+    return GestureDetector(
+      onTap: () {
+        if (title == '目录') {
+          _scaffoldKey.currentState?.openDrawer(); // 使用 key 打开侧边栏
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 7),
+        child: Column(
+          children: <Widget>[
+            Image.asset(icon),
+            SizedBox(height: 5),
+            Text(title, style: TextStyle(fontSize: Utility.fixedFontSize(12), color: SQColor.darkGray)),
+          ],
+        ),
+      ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          GestureDetector(
-            onTapDown: (_) {
-              hide();
-            },
-            child: Container(color: Colors.transparent),
-          ),
-          buildTopView(context),
-          buildBottomView(),
-        ],
+    return Scaffold(
+      key: _scaffoldKey, // 设置 Scaffold 的 key
+      drawer: buildDrawer(),
+      body: Container(
+        child: Stack(
+          children: <Widget>[
+            GestureDetector(
+              onTapDown: (_) {
+                hide();
+              },
+              child: Container(color: Colors.transparent),
+            ),
+            buildTopView(context),
+            buildBottomView(),
+          ],
+        ),
       ),
     );
   }
