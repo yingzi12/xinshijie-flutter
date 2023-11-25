@@ -42,11 +42,13 @@ class Article {
     }else{
       nextArticleId = chapter.next!.id!.toInt()??-1;
     }
-    if(chapter.previous==null){
-      preArticleId=-1;
-    }else{
-      preArticleId = chapter.previous!.id!.toInt() ??-1;
-    }
+    preArticleId=-1;
+
+    // if(chapter.previous==null){
+    //   preArticleId=-1;
+    // }else{
+    //   preArticleId = chapter.previous!.id!.toInt() ??-1;
+    // }
   }
 
   String stringAtPageIndex(int index) {

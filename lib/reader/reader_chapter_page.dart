@@ -48,6 +48,7 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
 
   @override
   void initState() {
+    print("------------------main-------initState-----------------------------");
     super.initState();
     pageController.addListener(onScroll);
 
@@ -56,17 +57,20 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
 
   @override
   void didChangeDependencies() {
+    print("------------------main-------didChangeDependencies-----------------------------");
     super.didChangeDependencies();
     routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
   }
 
   @override
   void didPop() {
+    print("------------------main-------didPop-----------------------------");
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   }
 
   @override
   void dispose() {
+    print("------------------main-------dispose-----------------------------");
     pageController.dispose();
     routeObserver.unsubscribe(this);
     super.dispose();
@@ -109,10 +113,24 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
     //初始化当前章节id
     currentChapterId = this.widget.chapterId;
 
-    await resetContent(currentChapterId, PageJumpType.stay);
+    PageJumpType jumpType=  PageJumpType.firstPage;
+    if (jumpType == PageJumpType.firstPage) {
+      pageIndex = 0;
+    } else if (jumpType == PageJumpType.lastPage) {
+      pageIndex = currentArticle!.pageCount - 1;
+    } else {
+      // For PageJumpType.stay, no need to change pageIndex
+      // pageIndex will not be updated, stays the same
+    }
+    setState(() {});
+    // if (jumpType != PageJumpType.stay) {
+    //   //跳转
+    //   pageController.jumpToPage(  pageIndex);
+    // }
   }
 
   resetContent(int articleId, PageJumpType jumpType) async {
+    print("------------------main-------resetContent-----------------------------");
     currentArticle = await fetchArticle(articleId);
     if (currentArticle!.preArticleId > 0) {
       preArticle = await fetchArticle(currentArticle!.preArticleId);
@@ -139,12 +157,14 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
   }
 
   onScroll() {
+    // print("------------------main-------onScroll-----------------------------");
     var page = pageController.offset / Screen.width;
     var nextArticlePage = currentArticle!.pageCount + (preArticle != null ? preArticle!.pageCount : 0);
 
-    print("Scrolling... Current page: $page, Next article page: $nextArticlePage");
+    // print("Scrolling... Current page: $page, Next article page: $nextArticlePage");
 
     if (nextArticle != null && page >= nextArticlePage) {
+      print("Scrolling.. nextArticle. Current page: $page, Next article page: $nextArticlePage");
       // 当向下翻页至下一篇文章时
       if (currentArticle!.nextArticleId > 0) {
         preArticle = currentArticle;
@@ -161,6 +181,8 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
     }
 
     if (preArticle != null && page < 0) {
+      print("Scrolling.. preArticle. Current page: $page, Next article page: $nextArticlePage");
+
       if (currentArticle!.preArticleId > 0) {
         // 当向上翻页至前一篇文章时
         nextArticle = currentArticle;
@@ -176,12 +198,15 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
         Toast.show('已经是第一页了');
       }
     } else if (preArticle == null && pageIndex == 0 && currentArticle!.preArticleId != 0) {
+      print("Scrolling.. ---------. Current page: $page, Next article pageIndex: $pageIndex");
+
       fetchPreviousArticle(currentArticle!.preArticleId);
     }
   }
 
 
   fetchPreviousArticle(int articleId) async {
+    print("-------------------------fetchPreviousArticle-----------------------------");
     print("Attempting to go to the fetchPreviousArticle $articleId");
     if ( isLoading || articleId <= 0) {
       return;
@@ -194,6 +219,7 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
   }
 
   fetchNextArticle(int articleId) async {
+    print("------------------main-------fetchNextArticle-----------------------------");
     print("Attempting to go to the fetchNextArticle $articleId");
     if ( isLoading || articleId <= 0) {
       return;
@@ -205,6 +231,7 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
   }
 
   Future<Article> fetchArticle(int chapterId) async {
+    print("-------------------------fetchArticle-----------------------------");
     ChapterEntity chapter = await ChapterApi.getInfo(chapterId, this.widget.sid, this.widget.wid);
     var article = Article.fromChapter(chapter);
     var contentHeight = Screen.height - topSafeHeight - ReaderUtils.topOffset - Screen.bottomSafeHeight - ReaderUtils.bottomOffset - 20;
@@ -214,6 +241,8 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
   }
 
   onTap(Offset position) async {
+    print("-------------------------onTap-----------------------------");
+
     print("Attempting to go to the onTap $position");
     double xRate = position.dx / Screen.width;
     if (xRate > 0.33 && xRate < 0.66) {
@@ -228,9 +257,9 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
     }
   }
 
-
-
   previousPage() {
+    print("-------------------------previousPage-----------------------------");
+
     print("Attempting to go to the previous page");
     if (pageIndex == 0 && currentArticle!.preArticleId == 0) {
       Toast.show('已经是第一页了');
@@ -240,8 +269,8 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
   }
 
   nextPage() {
+    print("-------------------------nextPage-----------------------------");
     print("Attempting to go to the next  page");
-
     if (pageIndex >= currentArticle!.pageCount - 1 && currentArticle!.nextArticleId == 0) {
       Toast.show('已经是最后一页了');
       return;
@@ -251,6 +280,8 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
 
 
   Widget buildPage(BuildContext context, int index) {
+    print("-----------------3--------buildPage-------------------------iddex:${index}----");
+
     // 确定当前页面是 preArticle, currentArticle 或 nextArticle 的哪一页
     // 这里的逻辑需要根据您的页面索引逻辑进行调整
 
@@ -276,8 +307,9 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
   }
 
   buildPageView() {
+    print("--------------1-----------buildPageView-----------------------------");
+
     int itemCount = (preArticle != null ? preArticle!.pageCount : 0) + currentArticle!.pageCount + (nextArticle != null ? nextArticle!.pageCount : 0);
-    // pageController.jumpToPage(3);
     return PageView.builder(
       physics: BouncingScrollPhysics(),
       controller: pageController,
@@ -288,6 +320,8 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
   }
 
   onPageChanged(int index) {
+    print("-------------------------onPageChanged-----------------------------");
+
     _pageChangeTimer?.cancel(); // 取消之前的计时器
     _pageChangeTimer = Timer(Duration(milliseconds: 500), () {
       // 延迟500毫秒后执行回调
@@ -301,6 +335,7 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
   }
 
   buildMenu() {
+    print("---------------2----------buildMenu-----------------------------");
     if (!isMenuVisible) {
       return Container();
     }
@@ -334,7 +369,7 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
     if (currentArticle == null) {
       return Scaffold();
     }
-
+    print("-----------------------main---build-----------------------------");
     return Scaffold(
       body: AnnotatedRegion(
         value: SystemUiOverlayStyle.dark,
