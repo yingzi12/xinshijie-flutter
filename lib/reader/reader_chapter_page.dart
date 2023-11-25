@@ -95,12 +95,12 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
     currentArticle = await fetchArticle(this.widget.chapterId);
 
     // 初始化 preArticle
-    if (currentArticle!.preArticleId > 0) {
-      preArticle = await fetchArticle(currentArticle!.preArticleId);
-    } else {
-      preArticle = null;
-    }
-
+    // if (currentArticle!.preArticleId > 0) {
+    //   preArticle = await fetchArticle(currentArticle!.preArticleId);
+    // } else {
+    //   preArticle = null;
+    // }
+    preArticle = null;
     // 初始化 nextArticle
     if (currentArticle!.nextArticleId > 0) {
       nextArticle = await fetchArticle(currentArticle!.nextArticleId);

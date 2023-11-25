@@ -230,7 +230,7 @@ class StoryDetailPageState extends State<StoryDetailPage> with RouteAware {
                         subtitle: story.lastChapter?.title ?? '',
                         attachedWidget: Text(story.status, style: TextStyle(fontSize: 14, color: story.statusColor())), onTap: () {
                           if(story.lastChapter!=null && story.lastChapter!.id != null && story.lastChapter!.id != -1){
-                            AppNavigator.pushReaderChapter(context,story.lastChapter.id, story.wid,story.id);
+                            AppNavigator.pushReaderChapter(context,story.lastChapter.id,story.id, story.wid);
                           }else{
                             //弹出提示
                           }
