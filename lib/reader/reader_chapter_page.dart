@@ -78,9 +78,11 @@ class ReaderChapterPageState extends State<ReaderChapterPage> with RouteAware {
 
     topSafeHeight = Screen.topSafeHeight;
 
-    List<dynamic> chaptersResponse = await Request.get(action: 'catalog');
+    List<ChapterSingleEntity> chaptersResponse = await ChapterApi.getList({"wid":widget.wid.toString(),"sid":widget.sid.toString()});
+    int index=0;
     chaptersResponse.forEach((data) {
-      chapters.add(Chapter.fromJson(data));
+      index=index+1;
+      chapters.add(Chapter.fromJsonEntiry(data.id!.toInt() ,data.title??"",index));
     });
 
     await resetContent(this.widget.chapterId, PageJumpType.stay);
