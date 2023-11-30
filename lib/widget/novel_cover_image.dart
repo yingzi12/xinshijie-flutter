@@ -9,22 +9,6 @@ class NovelCoverImage extends StatelessWidget {
   final double? height;
   NovelCoverImage(this.imgUrl, {this.width, this.height});
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Container(
-  //     child:
-  //     FadeInImage(
-  //       // 使用CachedNetworkImageProvider来加载网络图片
-  //       image: imgUrl != null ? CachedNetworkImageProvider(imgUrl) : AssetImage('assets/empty.jpg'),
-  //       // 设置备用图片为本地图片
-  //       placeholder: AssetImage('assets/empty.jpg'),
-  //       fit: BoxFit.cover,
-  //       width: width,
-  //       height: height,
-  //     ),
-  //     decoration: BoxDecoration(border: Border.all(color: SQColor.paper)),
-  //   );
-  // }
   @override
   Widget build(BuildContext context) {
     return Container(

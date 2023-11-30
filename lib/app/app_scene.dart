@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xinshijie_flutter/home/home_scene.dart';
 import 'package:xinshijie_flutter/public.dart';
 import 'package:xinshijie_flutter/app/root_scene.dart';
 import 'package:oktoast/oktoast.dart';
@@ -19,6 +20,15 @@ class AppPage extends StatelessWidget {
         textTheme: TextTheme(bodyLarge: TextStyle(color: SQColor.darkGray)),
       ),
       home: OKToast(child: RootPage()),
+        //注册路由表
+        routes: routerTable,
+
     );
   }
+
+  final routerTable={
+    // '/':(context)=>Tabs(),
+     '/form':(context)=>HomePage(),
+    // '/search':(context,{arguments})=>SearchPage(arguments:arguments),
+  };
 }

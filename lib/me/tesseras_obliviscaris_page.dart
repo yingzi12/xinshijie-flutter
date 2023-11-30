@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:xinshijie_flutter/common/je_kit/lib/widget/code_button.dart';
+import 'package:xinshijie_flutter/api/users_api.dart';
 import 'package:xinshijie_flutter/common/je_kit/lib/widget/toast.dart';
-import 'package:xinshijie_flutter/me/regin_page.dart';
+import 'package:xinshijie_flutter/me/captcha_image.dart';
+import 'package:xinshijie_flutter/me/login_page.dart';
+import 'package:xinshijie_flutter/model/captcha_entity.dart';
 import 'dart:async';
 
 import 'package:xinshijie_flutter/public.dart';
 
-class LoginPage extends StatefulWidget {
+class TesserasObliviscarisPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => LoginPageState();
+  State<StatefulWidget> createState() => TesserasObliviscarisPageState();
 }
 
-class LoginPageState extends State {
+class TesserasObliviscarisPageState extends State {
   TextEditingController accountEditer = TextEditingController();
   TextEditingController passwordEditer = TextEditingController();
   TextEditingController codeEditer = TextEditingController();
@@ -21,10 +23,20 @@ class LoginPageState extends State {
   Timer? timer;
   bool _isPasswordVisible = false; // Add this line in your stateful widget class
 
+  String captchaUuid = '';
+
+  Future<CaptchaEntity> fetchCaptcha() async {
+    // Call your captcha API and fetch the UUID and Base64 image
+    // This is a placeholder for your API call logic
+    CaptchaEntity captchaEntity = await UsersApi.getCode();
+    captchaUuid = captchaEntity.uuid ?? '';
+    return captchaEntity;
+  }
+  
   Future fetchSmsCode() async {
     if (accountEditer.text.length == 0) {
+      Alert(context: context, title: "通知", desc: '请输入手机号').show();
       // Toast.show('请输入手机号');
-      Alert(context: context, title: "通知", desc: "请输入手机号.").show();
       return;
     }
     try {
@@ -60,9 +72,8 @@ class LoginPageState extends State {
 
     // Check if the account and password are not empty
     if (account.isEmpty || password.isEmpty) {
+      Alert(context: context, title: "通知", desc: '账号或密码不能为空').show();
       // Toast.show('账号或密码不能为空');
-      Alert(context: context, title: "通知", desc: "账号或密码不能为空.").show();
-
       return;
     }
 
@@ -79,12 +90,13 @@ class LoginPageState extends State {
         // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserPage()));
       } else {
         // Show error message
-        Alert(context: context, title: "通知", desc: response['message'] ??"登录失败.").show();
+        Alert(context: context, title: "通知", desc: response['message'] ?? '登录失败').show();
 
         // Toast.show(response['message'] ?? '登录失败');
       }
     } catch (e) {
-      Alert(context: context, title: "通知", desc: "登录异常.").show();
+      Alert(context: context, title: "通知", desc: '登录异常: ${e.toString()}').show();
+
       // Toast.show('登录异常: ${e.toString()}');
     }
   }
@@ -178,7 +190,7 @@ class LoginPageState extends State {
               keyboardType: TextInputType.name,
               style: TextStyle(fontSize: 14, color: SQColor.darkGray),
               decoration: InputDecoration(
-                hintText: '请输入短信验证码',
+                hintText: '请输入验证码',
                 hintStyle: TextStyle(color: SQColor.gray),
                 border: InputBorder.none,
               ),
@@ -187,9 +199,8 @@ class LoginPageState extends State {
           Container(color: Color(0xffdae3f2), width: 1, height: 40),
           Theme(
             data: ThemeData(primaryColor: SQColor.primary),
-            child: CodeButton(
-              onPressed: fetchSmsCode,
-              coldDownSeconds: coldDownSeconds,
+            child: CaptchaImage(
+              onPressed: fetchCaptcha,
             ),
           ),
         ],
@@ -256,10 +267,10 @@ class LoginPageState extends State {
         ),
         TextButton(
           onPressed: () {
-            ReginPage().launch(context);
+            LoginPage().launch(context);
             // TODO: Add navigation logic for "注册"
           },
-          child: Text('注册', style: TextStyle(color: SQColor.darkGray)),
+          child: Text('登录', style: TextStyle(color: SQColor.darkGray)),
         ),
       ],
     );

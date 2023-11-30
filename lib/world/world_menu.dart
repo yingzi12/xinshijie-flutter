@@ -15,18 +15,24 @@ class WorldHomeMenu extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: infos.map((info) => menuItem(info)).toList(),
+        children: infos.map((info) => menuItem(context,info)).toList(),
       ),
     );
   }
 
-  Widget menuItem(MenuInfo info) {
-    return Column(
-      children: <Widget>[
-        Image.asset(info.icon),
-        SizedBox(height: 5),
-        Text(info.title, style: TextStyle(fontSize: 12, color: SQColor.gray)),
-      ],
+  Widget menuItem(BuildContext context,MenuInfo info) {
+    return GestureDetector(
+      onTap: () {
+        // Use Navigator to push the new route based on info.path
+        Navigator.pushNamed(context, info.url);
+      },
+      child: Column(
+        children: <Widget>[
+          Image.asset(info.icon),
+          SizedBox(height: 5),
+          Text(info.title, style: TextStyle(fontSize: 12, color: SQColor.gray)),
+        ],
+      ),
     );
   }
 }
